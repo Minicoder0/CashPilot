@@ -10,7 +10,7 @@ from authlib.integrations.flask_client import OAuth
 from werkzeug.middleware.proxy_fix import ProxyFix
 
 from services.category_service import categorize_transactions, categorize_with_rules
-from services.insight_service import generate_insights, build_summary
+from services.insight_service import generate_insights, build_summary, calculate_health_score, calculate_runway, detect_anomalies
 from services.ai_service import call_ai_streaming, is_ai_available
 from services.openai_service import analyze_transactions, is_openai_available
 
@@ -169,7 +169,16 @@ def get_insights():
 
     insights = generate_insights(txns)
     summary = build_summary(txns)
-    return jsonify({"insights": insights, "summary": summary})
+    health = calculate_health_score(txns)
+    runway = calculate_runway(txns)
+    anomalies = detect_anomalies(txns)
+    return jsonify({
+        "insights": insights,
+        "summary": summary,
+        "health_score": health,
+        "runway": runway,
+        "anomalies": anomalies,
+    })
 
 
 @app.route("/api/analyze", methods=["POST"])

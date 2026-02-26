@@ -213,6 +213,12 @@ async function fetchInsights() {
         if (!res.ok) throw new Error(data.error || 'Failed to get insights');
 
         renderInsights(data.insights);
+
+        // Render new creativity features
+        if (data.health_score) renderHealthScore(data.health_score);
+        if (data.runway) renderRunway(data.runway);
+        if (data.anomalies) renderAnomalies(data.anomalies);
+
     } catch (err) {
         grid.innerHTML = `<div class="insight-card info"><span class="insight-icon">ℹ️</span><span class="insight-text">Could not load AI insights. ${err.message}</span></div>`;
     }
@@ -233,6 +239,75 @@ function refreshInsights() {
     showToast('Refreshing insights...', 'info');
 }
 
+// ---- Health Score Gauge ----
+
+function renderHealthScore(health) {
+    const section = document.getElementById('healthScoreSection');
+    section.style.display = 'block';
+
+    const colorMap = { green: 'var(--green)', blue: 'var(--blue)', amber: 'var(--amber)', red: 'var(--red)' };
+    const color = colorMap[health.color] || 'var(--blue)';
+    const deg = (health.score / 100) * 360;
+
+    // Animate the gauge ring
+    const ring = document.getElementById('gaugeRing');
+    ring.style.background = `conic-gradient(${color} 0deg, ${color} ${deg}deg, rgba(255,255,255,0.05) ${deg}deg)`;
+
+    // Animate the number
+    const valueEl = document.getElementById('gaugeValue');
+    const duration = 1200;
+    const start = performance.now();
+    function animate(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        valueEl.textContent = Math.round(health.score * eased);
+        if (progress < 1) requestAnimationFrame(animate);
+    }
+    requestAnimationFrame(animate);
+
+    // Set tier
+    const tierEl = document.getElementById('gaugeTier');
+    tierEl.textContent = health.tier;
+    tierEl.style.color = color;
+}
+
+// ---- Cash Runway ----
+
+function renderRunway(runway) {
+    const el = document.getElementById('runwayValue');
+    const card = document.getElementById('cardRunway');
+    el.textContent = runway.label;
+
+    const colorMap = { green: 'var(--green)', amber: 'var(--amber)', red: 'var(--red)', gray: 'var(--text-muted)' };
+    el.style.color = colorMap[runway.color] || 'var(--text-secondary)';
+}
+
+// ---- Anomaly Detection ----
+
+function renderAnomalies(anomalies) {
+    const container = document.getElementById('anomaliesContainer');
+    const grid = document.getElementById('anomaliesGrid');
+
+    if (!anomalies || anomalies.length === 0) {
+        container.style.display = 'none';
+        return;
+    }
+
+    container.style.display = 'block';
+    grid.innerHTML = anomalies.map(a => `
+        <div class="anomaly-card">
+            <div class="anomaly-header">
+                <span class="anomaly-amount">${formatCurrency(a.amount)}</span>
+                <span class="anomaly-badge">${a.multiplier}x above avg</span>
+            </div>
+            <div class="anomaly-desc">${a.description}</div>
+            <div class="anomaly-reason">${a.reason}</div>
+            <div class="anomaly-meta">${a.date} · ${a.category}</div>
+        </div>
+    `).join('');
+}
+
 // ---- AI Badge ----
 
 function updateAIBadge(available) {
@@ -245,3 +320,4 @@ function updateAIBadge(available) {
         badge.title = 'AI Offline — using fallback mode';
     }
 }
+

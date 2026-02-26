@@ -58,6 +58,179 @@ def build_summary(transactions: list[dict]) -> dict:
     }
 
 
+def calculate_health_score(transactions: list[dict]) -> dict:
+    """Calculate a 0-100 financial health score from transaction data."""
+    summary = build_summary(transactions)
+    income = summary["total_income"]
+    expenses = summary["total_expenses"]
+    monthly = summary["monthly"]
+
+    score = 0
+
+    # 1. Net cashflow ratio (30 pts) — income / expenses
+    if expenses > 0:
+        ratio = income / expenses
+        score += min(ratio * 15, 30)  # 2.0 ratio = full 30
+    elif income > 0:
+        score += 30  # No expenses = perfect
+
+    # 2. Expense trend (20 pts) — is spending growing?
+    months_sorted = sorted(monthly.keys())
+    if len(months_sorted) >= 2:
+        recent = monthly[months_sorted[-1]]["expenses"]
+        previous = monthly[months_sorted[-2]]["expenses"]
+        if previous > 0:
+            growth = (recent - previous) / previous
+            if growth <= 0:
+                score += 20  # Expenses decreased
+            elif growth < 0.1:
+                score += 15
+            elif growth < 0.25:
+                score += 10
+            else:
+                score += 5  # High growth
+        else:
+            score += 15
+    else:
+        score += 10  # Not enough data
+
+    # 3. Income diversity (20 pts) — unique income sources
+    income_sources = len(summary["top_income_sources"])
+    if income_sources >= 5:
+        score += 20
+    elif income_sources >= 3:
+        score += 15
+    elif income_sources >= 2:
+        score += 10
+    else:
+        score += 5
+
+    # 4. Expense concentration (15 pts) — no single category > 50%
+    if expenses > 0 and summary["top_categories"]:
+        top_cat_pct = summary["top_categories"][0][1] / expenses
+        if top_cat_pct < 0.3:
+            score += 15
+        elif top_cat_pct < 0.5:
+            score += 10
+        else:
+            score += 5
+
+    # 5. Consistency (15 pts) — variance in monthly income
+    if len(months_sorted) >= 2:
+        incomes = [monthly[m]["income"] for m in months_sorted]
+        avg_income = sum(incomes) / len(incomes) if incomes else 0
+        if avg_income > 0:
+            variance = sum((i - avg_income) ** 2 for i in incomes) / len(incomes)
+            cv = (variance ** 0.5) / avg_income  # coefficient of variation
+            if cv < 0.15:
+                score += 15
+            elif cv < 0.3:
+                score += 10
+            else:
+                score += 5
+        else:
+            score += 5
+    else:
+        score += 8
+
+    score = min(round(score), 100)
+
+    # Determine tier
+    if score >= 80:
+        tier = "Excellent"
+        color = "green"
+    elif score >= 60:
+        tier = "Good"
+        color = "blue"
+    elif score >= 40:
+        tier = "Fair"
+        color = "amber"
+    else:
+        tier = "At Risk"
+        color = "red"
+
+    return {"score": score, "tier": tier, "color": color}
+
+
+def calculate_runway(transactions: list[dict]) -> dict:
+    """Calculate cash runway in months based on burn rate."""
+    summary = build_summary(transactions)
+    monthly = summary["monthly"]
+    months_sorted = sorted(monthly.keys())
+
+    if len(months_sorted) < 1:
+        return {"months": 0, "status": "unknown", "color": "gray"}
+
+    # Average monthly income and expenses
+    avg_income = sum(monthly[m]["income"] for m in months_sorted) / len(months_sorted)
+    avg_expenses = sum(monthly[m]["expenses"] for m in months_sorted) / len(months_sorted)
+    monthly_burn = avg_expenses - avg_income
+
+    if monthly_burn <= 0:
+        # Profitable — sustainable
+        return {"months": -1, "status": "sustainable", "color": "green", "label": "∞ Sustainable"}
+
+    # Calculate runway
+    # Use net cashflow as current "balance"
+    balance = summary["net_cashflow"]
+    if balance <= 0:
+        return {"months": 0, "status": "critical", "color": "red", "label": "0 months"}
+
+    runway = round(balance / monthly_burn, 1)
+
+    if runway >= 6:
+        status = "healthy"
+        color = "green"
+    elif runway >= 3:
+        status = "caution"
+        color = "amber"
+    else:
+        status = "critical"
+        color = "red"
+
+    return {"months": runway, "status": status, "color": color, "label": f"{runway} months"}
+
+
+def detect_anomalies(transactions: list[dict]) -> list[dict]:
+    """Detect spending anomalies — transactions 2x above category average."""
+    # Group expenses by category
+    cat_amounts = {}
+    for t in transactions:
+        if t.get("type") == "expense":
+            cat = t.get("category", "other")
+            if cat not in cat_amounts:
+                cat_amounts[cat] = []
+            cat_amounts[cat].append(abs(t["amount"]))
+
+    # Calculate category averages
+    cat_avg = {}
+    for cat, amounts in cat_amounts.items():
+        if len(amounts) >= 2:  # Need at least 2 to compare
+            cat_avg[cat] = sum(amounts) / len(amounts)
+
+    # Find anomalies
+    anomalies = []
+    for t in transactions:
+        if t.get("type") == "expense":
+            cat = t.get("category", "other")
+            amt = abs(t["amount"])
+            if cat in cat_avg and amt > cat_avg[cat] * 2:
+                multiplier = round(amt / cat_avg[cat], 1)
+                anomalies.append({
+                    "description": t.get("description", "Unknown"),
+                    "amount": amt,
+                    "category": cat,
+                    "average": round(cat_avg[cat], 2),
+                    "multiplier": multiplier,
+                    "reason": f"This ${amt:,.2f} {cat} expense is {multiplier}x your average (${cat_avg[cat]:,.2f})",
+                    "date": t.get("date", ""),
+                })
+
+    # Sort by multiplier, return top 5
+    anomalies.sort(key=lambda x: x["multiplier"], reverse=True)
+    return anomalies[:5]
+
+
 def generate_insights(transactions: list[dict]) -> list[dict]:
     """Generate financial insights using OpenAI, with static fallback."""
     if not is_ai_available():

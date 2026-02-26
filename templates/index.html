@@ -103,6 +103,23 @@
 
         <!-- Dashboard (hidden until data is loaded) -->
         <section class="dashboard" id="dashboard" style="display:none;">
+            <!-- Health Score Gauge -->
+            <div class="health-score-section" id="healthScoreSection">
+                <div class="health-gauge">
+                    <div class="gauge-ring" id="gaugeRing">
+                        <div class="gauge-inner">
+                            <span class="gauge-value" id="gaugeValue">0</span>
+                            <span class="gauge-label">/ 100</span>
+                        </div>
+                    </div>
+                    <div class="gauge-info">
+                        <h3>Financial Health Score</h3>
+                        <span class="gauge-tier" id="gaugeTier">Calculating...</span>
+                        <p class="gauge-desc">Composite score based on cashflow ratio, expense trends, income diversity, spending concentration, and revenue consistency.</p>
+                    </div>
+                </div>
+            </div>
+
             <!-- Summary Cards -->
             <div class="cards-grid" id="cardsGrid">
                 <div class="card card-income" id="cardIncome">
@@ -133,6 +150,13 @@
                         <span class="card-value" id="txnCount">0</span>
                     </div>
                 </div>
+                <div class="card card-runway" id="cardRunway">
+                    <div class="card-icon">⏱️</div>
+                    <div class="card-body">
+                        <span class="card-label">Cash Runway</span>
+                        <span class="card-value" id="runwayValue">—</span>
+                    </div>
+                </div>
             </div>
 
             <!-- Charts Row -->
@@ -155,6 +179,15 @@
                         <canvas id="expenseChart"></canvas>
                     </div>
                 </div>
+            </div>
+
+            <!-- Anomaly Alerts -->
+            <div class="anomalies-container" id="anomaliesContainer" style="display:none;">
+                <div class="section-header">
+                    <h2><span class="anomaly-pulse">⚠️</span> Spending Anomalies Detected</h2>
+                    <span class="section-subtitle">Transactions significantly above category average</span>
+                </div>
+                <div class="anomalies-grid" id="anomaliesGrid"></div>
             </div>
 
             <!-- AI Insights -->
