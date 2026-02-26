@@ -14,11 +14,12 @@
 CashPilot turns raw CSV bank statements into **actionable financial insights** in seconds — no accounting knowledge needed.
 
 - **📊 Smart Dashboard** — Summary cards, monthly cashflow chart, expense breakdown pie chart
-- **🤖 AI Insights** — GPT-4.1-mini analyzes your spending and generates personalized tips
+- **🧠 Creative AI Insights** — Includes a Financial Health Score (0-100), Cash Runway predictor, and Anomaly Detection (flagging unusual spending spikes)
+- **🤖 Actionable Advice** — GPT-4.1-mini analyzes your spending and generates personalized tips
 - **💬 AI Chat** — Ask CashPilot anything about your finances in plain English
 - **🏷️ Auto-Categorization** — Transactions are categorized using AI (with rule-based fallback)
 - **🔐 Google Auth** — Secure sign-in with your Google account
-- **📱 Mobile Friendly** — Works on desktop, tablet, and phone
+- **📱 Responsive UI** — Professional Light Theme, works on desktop, tablet, and phone
 
 ---
 
@@ -105,7 +106,7 @@ CashPilot/
 │   ├── index.html            # Main dashboard
 │   └── login.html            # Google sign-in page
 ├── static/
-│   ├── css/style.css         # Dark glassmorphism theme
+│   ├── css/style.css         # Clean B2B Light theme
 │   └── js/
 │       ├── app.js            # Dashboard logic
 │       ├── charts.js         # Chart.js visualizations
