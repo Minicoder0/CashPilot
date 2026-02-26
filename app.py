@@ -20,6 +20,12 @@ app = Flask(__name__)
 app.secret_key = os.getenv("FLASK_SECRET_KEY", secrets.token_hex(32))
 app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
 
+# ---- Session cookie config for HTTPS behind Railway proxy ----
+app.config["SESSION_COOKIE_SECURE"] = True
+app.config["SESSION_COOKIE_HTTPONLY"] = True
+app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
+app.config["PREFERRED_URL_SCHEME"] = "https"
+
 # ---- Google OAuth Setup ----
 oauth = OAuth(app)
 google = oauth.register(
@@ -55,7 +61,13 @@ def login():
 
 @app.route("/auth/login")
 def auth_login():
-    redirect_uri = url_for("auth_callback", _external=True)
+    # Use RAILWAY_PUBLIC_DOMAIN or APP_URL env var if available, otherwise fall back to url_for
+    app_url = os.getenv("APP_URL")  # e.g. https://cashpilot-production.up.railway.app
+    if app_url:
+        redirect_uri = app_url.rstrip("/") + "/auth/callback"
+    else:
+        redirect_uri = url_for("auth_callback", _external=True)
+    print(f"[DEBUG] OAuth redirect_uri: {redirect_uri}")
     return google.authorize_redirect(redirect_uri)
 
 

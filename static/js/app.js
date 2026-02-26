@@ -251,7 +251,7 @@ function renderHealthScore(health) {
 
     // Animate the gauge ring
     const ring = document.getElementById('gaugeRing');
-    ring.style.background = `conic-gradient(${color} 0deg, ${color} ${deg}deg, rgba(255,255,255,0.05) ${deg}deg)`;
+    ring.style.background = `conic-gradient(${color} 0deg, ${color} ${deg}deg, var(--border-color) ${deg}deg)`;
 
     // Animate the number
     const valueEl = document.getElementById('gaugeValue');

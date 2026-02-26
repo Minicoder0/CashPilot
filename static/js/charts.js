@@ -34,7 +34,7 @@ const PIE_BORDERS = [
 ];
 
 // Shared Chart.js defaults
-Chart.defaults.color = '#94a3b8';
+Chart.defaults.color = '#64748b';
 Chart.defaults.font.family = "'Inter', sans-serif";
 Chart.defaults.font.size = 12;
 
@@ -128,8 +128,10 @@ function renderCashflowChart() {
                     },
                 },
                 tooltip: {
-                    backgroundColor: 'rgba(17, 24, 39, 0.95)',
-                    borderColor: 'rgba(255, 255, 255, 0.1)',
+                    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                    titleColor: '#0f172a',
+                    bodyColor: '#475569',
+                    borderColor: '#cbd5e1',
                     borderWidth: 1,
                     padding: 12,
                     titleFont: { weight: '600' },
@@ -142,11 +144,11 @@ function renderCashflowChart() {
             },
             scales: {
                 x: {
-                    grid: { color: 'rgba(255,255,255,0.03)' },
+                    grid: { color: 'rgba(0,0,0,0.05)' },
                     ticks: { padding: 8 },
                 },
                 y: {
-                    grid: { color: 'rgba(255,255,255,0.03)' },
+                    grid: { color: 'rgba(0,0,0,0.05)' },
                     ticks: {
                         padding: 8,
                         callback: val => '$' + (val / 1000).toFixed(0) + 'k'
@@ -222,8 +224,10 @@ function renderExpenseChart() {
                     },
                 },
                 tooltip: {
-                    backgroundColor: 'rgba(17, 24, 39, 0.95)',
-                    borderColor: 'rgba(255, 255, 255, 0.1)',
+                    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                    titleColor: '#0f172a',
+                    bodyColor: '#475569',
+                    borderColor: '#cbd5e1',
                     borderWidth: 1,
                     padding: 12,
                     callbacks: {
