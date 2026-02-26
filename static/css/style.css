@@ -1309,7 +1309,7 @@ body {
 
 
 /* ===============================================
-   Responsive (basic)
+   Responsive — Tablet (≤1024px)
    =============================================== */
 
 @media (max-width: 1024px) {
@@ -1320,35 +1320,247 @@ body {
     .charts-row {
         grid-template-columns: 1fr;
     }
+
+    .insights-grid {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
 }
 
+
+/* ===============================================
+   Responsive — Mobile (≤640px)
+   =============================================== */
+
 @media (max-width: 640px) {
+
+    /* ---- Layout ---- */
     .main {
-        padding: 16px;
+        padding: 12px;
+        padding-bottom: 80px;
     }
 
+    /* ---- Header ---- */
     .header {
-        padding: 12px 16px;
+        padding: 10px 14px;
     }
 
     .header-tagline {
         display: none;
     }
 
-    .cards-grid {
-        grid-template-columns: 1fr;
+    .logo h1 {
+        font-size: 1.2rem;
     }
 
-    .chat-panel {
-        width: calc(100vw - 48px);
-        right: -12px;
+    .logo-icon {
+        font-size: 1.3rem;
     }
 
     .user-name {
         display: none;
     }
 
+    .user-menu {
+        gap: 6px;
+        padding-left: 8px;
+    }
+
+    .logout-btn {
+        font-size: 0.65rem !important;
+        padding: 4px 6px !important;
+    }
+
+    .ai-badge {
+        font-size: 0.7rem;
+        padding: 4px 8px;
+    }
+
+    /* ---- Summary Cards ---- */
+    .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .summary-card {
+        padding: 14px;
+    }
+
+    .card-label {
+        font-size: 0.68rem;
+    }
+
+    .card-value {
+        font-size: 1.3rem;
+    }
+
+    .card-icon {
+        font-size: 1.6rem;
+    }
+
+    /* ---- Charts ---- */
+    .chart-container {
+        padding: 16px;
+    }
+
+    .chart-wrapper {
+        height: 220px;
+    }
+
+    .section-header h2 {
+        font-size: 0.95rem;
+    }
+
+    /* ---- AI Insights ---- */
+    .insights-container {
+        padding: 16px;
+    }
+
+    .insights-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .insight-card {
+        padding: 12px;
+    }
+
+    .insight-text {
+        font-size: 0.82rem;
+    }
+
+    .insight-icon {
+        font-size: 1.2rem;
+    }
+
+    .section-subtitle {
+        font-size: 0.7rem;
+    }
+
+    /* ---- Transaction Table ---- */
+    .transactions-container {
+        padding: 16px;
+    }
+
+    .table-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin: 0 -16px;
+        padding: 0 16px;
+    }
+
+    .transactions-table {
+        min-width: 500px;
+        font-size: 0.8rem;
+    }
+
+    .transactions-table th,
+    .transactions-table td {
+        padding: 10px 8px;
+    }
+
+    .transactions-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .transactions-header h2 {
+        font-size: 1rem;
+    }
+
+    /* ---- Empty State ---- */
+    .empty-icon {
+        font-size: 3rem;
+    }
+
+    .empty-content h2 {
+        font-size: 1.4rem;
+    }
+
+    .empty-content>p {
+        font-size: 0.9rem;
+    }
+
+    .empty-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .empty-divider {
+        display: none;
+    }
+
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* ---- Help Card ---- */
+    .help-card {
+        max-width: 100%;
+    }
+
+    /* ---- Chat Panel ---- */
+    .chat-panel {
+        width: calc(100vw - 24px);
+        right: -4px;
+        bottom: 60px;
+        max-height: 70vh;
+    }
+
+    .chat-toggle {
+        bottom: 12px;
+        right: 12px;
+        padding: 12px 18px;
+        font-size: 0.82rem;
+    }
+
+    .chat-messages {
+        max-height: 45vh;
+    }
+
+    /* ---- Login Page ---- */
     .login-card {
         padding: 32px 24px;
+    }
+
+    .login-logo h1 {
+        font-size: 1.6rem;
+    }
+
+    .login-logo-icon {
+        font-size: 1.8rem;
+    }
+
+    .login-desc {
+        font-size: 0.82rem;
+    }
+
+    .google-btn {
+        padding: 12px 20px;
+        font-size: 0.88rem;
+    }
+}
+
+
+/* ===============================================
+   Responsive — Small phones (≤380px)
+   =============================================== */
+
+@media (max-width: 380px) {
+    .cards-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .card-value {
+        font-size: 1.1rem;
+    }
+
+    .chart-wrapper {
+        height: 180px;
+    }
+
+    .main {
+        padding: 8px;
     }
 }
