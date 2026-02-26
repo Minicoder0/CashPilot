@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CashPilot — AI Financial Co-Pilot</title>
+    <meta name="description"
+        content="AI-powered financial intelligence for micro businesses. Categorize transactions, generate insights, and understand your money.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header-left">
+            <div class="logo">
+                <span class="logo-icon">✈️</span>
+                <h1>Cash<span class="logo-accent">Pilot</span></h1>
+            </div>
+            <span class="header-tagline">AI Financial Co-Pilot</span>
+        </div>
+        <div class="header-right">
+            <div class="ai-badge" id="aiBadge" title="AI Status">
+                <span class="ai-dot"></span>
+                <span>AI</span>
+            </div>
+            {% if user %}
+            <div class="user-menu" id="userMenu">
+                <img class="user-avatar" src="{{ user.picture }}" alt="{{ user.name }}" referrerpolicy="no-referrer"
+                    onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                <div class="user-avatar-fallback" style="display:none">{{ user.name[0] }}</div>
+                <span class="user-name">{{ user.name.split(' ')[0] }}</span>
+                <a href="/auth/logout" class="btn btn-sm btn-ghost logout-btn" title="Sign out">↗ Sign out</a>
+            </div>
+            {% endif %}
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Empty State -->
+        <section class="empty-state" id="emptyState">
+            <div class="empty-content">
+                <div class="empty-icon">📊</div>
+                <h2>Welcome to CashPilot</h2>
+                <p>Upload your transactions or load demo data to get AI-powered financial insights.</p>
+                <div class="empty-actions">
+                    <button class="btn btn-primary btn-lg" id="loadDemoBtn" onclick="loadDemoData()">
+                        <span class="btn-icon">⚡</span>
+                        Load Demo Data
+                    </button>
+                    <span class="empty-divider">or</span>
+                    <label class="btn btn-outline btn-lg" for="csvUpload">
+                        <span class="btn-icon">📁</span>
+                        Upload CSV
+                    </label>
+                    <input type="file" id="csvUpload" accept=".csv" style="display:none"
+                        onchange="handleCSVUpload(event)">
+                </div>
+                <p class="empty-hint">CSV format: date, description, amount</p>
+
+                <!-- Collapsible Help Card -->
+                <details class="help-card" id="helpCard">
+                    <summary class="help-card-toggle">
+                        <span class="help-card-icon">📖</span>
+                        How to Use & AI Usage Guide
+                        <span class="help-card-chevron">▸</span>
+                    </summary>
+                    <div class="help-card-body">
+                        <div class="help-section">
+                            <h4>📁 Uploading Transactions</h4>
+                            <ol>
+                                <li>Prepare a CSV file with columns: <strong>date</strong>,
+                                    <strong>description</strong>, <strong>amount</strong>
+                                </li>
+                                <li>Click <strong>"Upload CSV"</strong> or drag & drop your file</li>
+                                <li>Transactions are auto-categorized and displayed instantly</li>
+                            </ol>
+                        </div>
+                        <div class="help-section">
+                            <h4>🤖 AI Analysis</h4>
+                            <ul>
+                                <li>AI processing runs <strong>once per upload</strong> — results are cached</li>
+                                <li>Re-requesting analysis on the same data returns cached results instantly</li>
+                                <li>Only the first 50 transactions are sent to minimize token usage</li>
+                                <li>This keeps API credit usage low and responses fast</li>
+                            </ul>
+                        </div>
+                        <div class="help-section">
+                            <h4>⚡ Quick Start</h4>
+                            <p>No CSV? Click <strong>"Load Demo Data"</strong> to explore with sample transactions.</p>
+                        </div>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- Dashboard (hidden until data is loaded) -->
+        <section class="dashboard" id="dashboard" style="display:none;">
+            <!-- Summary Cards -->
+            <div class="cards-grid" id="cardsGrid">
+                <div class="card card-income" id="cardIncome">
+                    <div class="card-icon">💰</div>
+                    <div class="card-body">
+                        <span class="card-label">Total Income</span>
+                        <span class="card-value" id="totalIncome">$0</span>
+                    </div>
+                </div>
+                <div class="card card-expense" id="cardExpense">
+                    <div class="card-icon">💸</div>
+                    <div class="card-body">
+                        <span class="card-label">Total Expenses</span>
+                        <span class="card-value" id="totalExpenses">$0</span>
+                    </div>
+                </div>
+                <div class="card card-net" id="cardNet">
+                    <div class="card-icon">📈</div>
+                    <div class="card-body">
+                        <span class="card-label">Net Cashflow</span>
+                        <span class="card-value" id="netCashflow">$0</span>
+                    </div>
+                </div>
+                <div class="card card-count" id="cardCount">
+                    <div class="card-icon">📋</div>
+                    <div class="card-body">
+                        <span class="card-label">Transactions</span>
+                        <span class="card-value" id="txnCount">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Row -->
+            <div class="charts-row">
+                <div class="chart-container" id="barChartContainer">
+                    <div class="section-header">
+                        <h2>Monthly Cashflow</h2>
+                        <span class="section-subtitle">Income vs Expenses over time</span>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="cashflowChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-container chart-small" id="pieChartContainer">
+                    <div class="section-header">
+                        <h2>Expense Breakdown</h2>
+                        <span class="section-subtitle">Where your money goes</span>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="expenseChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Insights -->
+            <div class="insights-container" id="insightsContainer">
+                <div class="section-header">
+                    <h2>🤖 AI Insights</h2>
+                    <span class="section-subtitle">Powered by AI</span>
+                    <button class="btn btn-sm btn-ghost" onclick="refreshInsights()" id="refreshInsightsBtn">
+                        🔄 Refresh
+                    </button>
+                </div>
+                <div class="insights-grid" id="insightsGrid">
+                    <div class="insight-skeleton"></div>
+                    <div class="insight-skeleton"></div>
+                    <div class="insight-skeleton"></div>
+                </div>
+            </div>
+
+            <!-- Transaction List -->
+            <div class="transactions-container" id="transactionsContainer">
+                <div class="section-header">
+                    <h2>Transactions</h2>
+                    <span class="section-subtitle" id="txnSubtitle">All transactions</span>
+                    <div class="section-actions">
+                        <label class="btn btn-sm btn-ghost" for="csvUpload2">
+                            📁 Upload New CSV
+                        </label>
+                        <input type="file" id="csvUpload2" accept=".csv" style="display:none"
+                            onchange="handleCSVUpload(event)">
+                    </div>
+                </div>
+                <div class="table-wrapper">
+                    <table class="txn-table" id="txnTable">
+                        <thead>
+                            <tr>
+                                <th class="sortable" data-sort="date" onclick="sortTable('date')">Date <span
+                                        class="sort-arrow">↕</span></th>
+                                <th>Description</th>
+                                <th class="sortable" data-sort="category" onclick="sortTable('category')">Category <span
+                                        class="sort-arrow">↕</span></th>
+                                <th class="sortable" data-sort="amount" onclick="sortTable('amount')">Amount <span
+                                        class="sort-arrow">↕</span></th>
+                            </tr>
+                        </thead>
+                        <tbody id="txnBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chat Interface -->
+        <div class="chat-container" id="chatContainer" style="display:none;">
+            <div class="chat-toggle" id="chatToggle" onclick="toggleChat()">
+                <span>💬</span>
+                <span class="chat-toggle-text">Ask CashPilot AI</span>
+            </div>
+            <div class="chat-panel" id="chatPanel">
+                <div class="chat-header">
+                    <h3>💬 CashPilot AI</h3>
+                    <button class="chat-close" onclick="toggleChat()">✕</button>
+                </div>
+                <div class="chat-messages" id="chatMessages">
+                    <div class="chat-message ai">
+                        <div class="chat-bubble">
+                            Hi! I'm CashPilot AI. Ask me anything about your finances. Try:
+                            <ul>
+                                <li>"What are my biggest expenses?"</li>
+                                <li>"Who are my top customers?"</li>
+                                <li>"What should I be worried about?"</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-input-wrapper">
+                    <input type="text" class="chat-input" id="chatInput" placeholder="Ask about your finances..."
+                        onkeydown="if(event.key==='Enter')sendChat()">
+                    <button class="chat-send" onclick="sendChat()" id="chatSendBtn">➤</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay" style="display:none;">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <p id="loadingText">Analyzing transactions...</p>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/charts.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+</body>
+
+</html>
