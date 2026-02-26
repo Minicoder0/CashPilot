@@ -7,6 +7,7 @@ from functools import wraps
 from flask import Flask, render_template, request, jsonify, Response, stream_with_context, session, redirect, url_for
 from dotenv import load_dotenv
 from authlib.integrations.flask_client import OAuth
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 from services.category_service import categorize_transactions, categorize_with_rules
 from services.insight_service import generate_insights, build_summary
@@ -17,7 +18,7 @@ load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = os.getenv("FLASK_SECRET_KEY", secrets.token_hex(32))
-app.config["PREFERRED_URL_SCHEME"] = "https"
+app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
 
 # ---- Google OAuth Setup ----
 oauth = OAuth(app)
