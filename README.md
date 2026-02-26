@@ -138,4 +138,6 @@ To deploy your own:
 
 ## 📜 License
 
-This project is for educational and hackathon purposes.
+## License
+
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
