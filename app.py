@@ -41,9 +41,23 @@ db.init_app(app)
 with app.app_context():
     try:
         db.create_all()
-        print("[DB] Tables created successfully")
+        # Migrate: add new columns to existing tables if missing
+        from sqlalchemy import inspect, text
+        inspector = inspect(db.engine)
+        if 'users' in inspector.get_table_names():
+            existing_cols = {c['name'] for c in inspector.get_columns('users')}
+            with db.engine.connect() as conn:
+                if 'password_hash' not in existing_cols:
+                    conn.execute(text("ALTER TABLE users ADD COLUMN password_hash VARCHAR(255)"))
+                    conn.commit()
+                    print("[DB] Added password_hash column")
+                if 'auth_provider' not in existing_cols:
+                    conn.execute(text("ALTER TABLE users ADD COLUMN auth_provider VARCHAR(20) DEFAULT 'google'"))
+                    conn.commit()
+                    print("[DB] Added auth_provider column")
+        print("[DB] Tables ready")
     except Exception as e:
-        print(f"[DB] Error creating tables: {e}")
+        print(f"[DB] Error during setup: {e}")
 
 # ---- Session cookie config for HTTPS behind Railway proxy ----
 app.config["SESSION_COOKIE_SECURE"] = True
@@ -140,7 +154,7 @@ def auth_callback():
             "id": user.id,
             "name": user.name,
             "email": user.email,
-            "picture": user.picture,
+            "picture": user.picture or "",
         }
     return redirect(url_for("index"))
 

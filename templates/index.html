@@ -33,9 +33,13 @@
             </div>
             {% if user %}
             <div class="user-menu" id="userMenu">
+                {% if user.picture %}
                 <img class="user-avatar" src="{{ user.picture }}" alt="{{ user.name }}" referrerpolicy="no-referrer"
                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
                 <div class="user-avatar-fallback" style="display:none">{{ user.name[0] }}</div>
+                {% else %}
+                <div class="user-avatar-fallback" style="display:flex">{{ user.name[0] }}</div>
+                {% endif %}
                 <span class="user-name">{{ user.name.split(' ')[0] }}</span>
                 <a href="/auth/logout" class="btn btn-sm btn-ghost logout-btn" title="Sign out">↗ Sign out</a>
             </div>
