@@ -312,16 +312,6 @@ def build_email_html(user_name: str, summary: dict, health: dict, anomalies: lis
         <!-- Anomalies -->
         {anomaly_html}
 
-        <!-- CTA -->
-        <div style="text-align: center; margin-top: 32px;">
-            <a href="{APP_URL}" style="display: inline-block; background: #3B82F6; color: #FFFFFF; text-decoration: none; padding: 14px 32px; border-radius: 8px; font-weight: 600; font-size: 15px;">
-                View Full Dashboard →
-            </a>
-            <p style="font-size: 13px; color: #9CA3AF; margin-top: 12px;">
-                You can also ask CashPilot AI any question about your finances using the chat on your dashboard.
-            </p>
-        </div>
-
     </div>
 
     <!-- Footer -->
@@ -374,8 +364,6 @@ def build_email_plain(user_name: str, summary: dict, health: dict, anomalies: li
 {insights_text}
 
 {anomaly_text}
-
-View your full dashboard: {APP_URL}
 
 ---
 ✈️ CashPilot — AI Financial Co-Pilot
