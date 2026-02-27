@@ -13,6 +13,7 @@ from services.category_service import categorize_transactions, categorize_with_r
 from services.insight_service import generate_insights, build_summary, calculate_health_score, calculate_runway, detect_anomalies
 from services.ai_service import call_ai_streaming, is_ai_available
 from services.openai_service import analyze_transactions, is_openai_available
+from services.email_service import send_email_background, is_email_available
 from models import db, User, Transaction
 
 load_dotenv()
@@ -283,7 +284,17 @@ def demo_data():
     db.session.commit()
 
     txns = [t.to_dict() for t in Transaction.query.filter_by(user_id=user.id).all()]
-    return jsonify({"transactions": txns, "ai_available": is_ai_available()})
+
+    # Send email summary in background (zero delay)
+    email_sent = False
+    if is_email_available() and user.email:
+        summary = build_summary(txns)
+        health = calculate_health_score(txns)
+        anomalies = detect_anomalies(txns)
+        send_email_background(user.email, user.name or "there", summary, health, anomalies, is_demo=True)
+        email_sent = True
+
+    return jsonify({"transactions": txns, "ai_available": is_ai_available(), "email_sent": email_sent})
 
 
 @app.route("/api/upload", methods=["POST"])
@@ -354,7 +365,17 @@ def upload_csv():
         db.session.commit()
 
         txns = [t.to_dict() for t in Transaction.query.filter_by(user_id=user.id).all()]
-        return jsonify({"transactions": txns, "count": len(txns), "ai_available": is_ai_available()})
+
+        # Send email summary in background (zero delay)
+        email_sent = False
+        if is_email_available() and user.email:
+            summary = build_summary(txns)
+            health = calculate_health_score(txns)
+            anomalies = detect_anomalies(txns)
+            send_email_background(user.email, user.name or "there", summary, health, anomalies, is_demo=False)
+            email_sent = True
+
+        return jsonify({"transactions": txns, "count": len(txns), "ai_available": is_ai_available(), "email_sent": email_sent})
 
     except Exception as e:
         db.session.rollback()

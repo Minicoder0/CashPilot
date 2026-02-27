@@ -64,6 +64,9 @@ async function loadDemoData() {
         updateAIBadge(data.ai_available);
         renderDashboard();
         showToast('Demo data loaded successfully!', 'success');
+        if (data.email_sent) {
+            setTimeout(() => showToast('📧 Financial summary sent to your email!', 'info'), 1500);
+        }
     } catch (err) {
         showToast(err.message, 'error');
     } finally {
@@ -93,6 +96,9 @@ async function handleCSVUpload(event) {
         updateAIBadge(data.ai_available);
         renderDashboard();
         showToast(`${data.count} transactions loaded!`, 'success');
+        if (data.email_sent) {
+            setTimeout(() => showToast('📧 Financial summary sent to your email!', 'info'), 1500);
+        }
     } catch (err) {
         showToast(err.message, 'error');
     } finally {
