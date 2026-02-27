@@ -6,3 +6,4 @@ authlib
 requests
 flask-sqlalchemy
 psycopg2-binary
+bcrypt

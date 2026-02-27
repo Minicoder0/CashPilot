@@ -118,26 +118,100 @@ def auth_callback():
         user = User.query.filter_by(email=email).first()
         if not user:
             user = User(
-                google_id=user_info.get("sub"), # 'sub' is standard for google OpenID
+                google_id=user_info.get("sub"),
                 email=email,
                 name=user_info.get("name", "User"),
-                picture=user_info.get("picture", "")
+                picture=user_info.get("picture", ""),
+                auth_provider="google"
             )
             db.session.add(user)
             db.session.commit()
         else:
-            # Update info just in case
+            # Update info & link google if they registered with email first
             user.name = user_info.get("name", user.name)
             user.picture = user_info.get("picture", user.picture)
+            if not user.google_id:
+                user.google_id = user_info.get("sub")
+            if user.auth_provider == "email":
+                user.auth_provider = "both"
             db.session.commit()
 
         session["user"] = {
-            "id": user.id, # Keep DB ID for easier joins
+            "id": user.id,
             "name": user.name,
             "email": user.email,
             "picture": user.picture,
         }
     return redirect(url_for("index"))
+
+
+# ---- Email/Password Auth Routes ----
+
+@app.route("/auth/register", methods=["POST"])
+def auth_register():
+    """Register a new user with email and password."""
+    data = request.get_json() or {}
+    name = data.get("name", "").strip()
+    email = data.get("email", "").strip().lower()
+    password = data.get("password", "")
+
+    if not name or not email or not password:
+        return jsonify({"error": "Name, email, and password are required."}), 400
+
+    if len(password) < 6:
+        return jsonify({"error": "Password must be at least 6 characters."}), 400
+
+    existing = User.query.filter_by(email=email).first()
+    if existing:
+        if existing.auth_provider in ("google", "both"):
+            return jsonify({"error": "This email is linked to a Google account. Please sign in with Google."}), 400
+        return jsonify({"error": "An account with this email already exists. Please sign in."}), 400
+
+    user = User(
+        email=email,
+        name=name,
+        auth_provider="email"
+    )
+    user.set_password(password)
+    db.session.add(user)
+    db.session.commit()
+
+    session["user"] = {
+        "id": user.id,
+        "name": user.name,
+        "email": user.email,
+        "picture": user.picture or "",
+    }
+    return jsonify({"success": True, "redirect": url_for("index")})
+
+
+@app.route("/auth/email-login", methods=["POST"])
+def auth_email_login():
+    """Sign in with email and password."""
+    data = request.get_json() or {}
+    email = data.get("email", "").strip().lower()
+    password = data.get("password", "")
+
+    if not email or not password:
+        return jsonify({"error": "Email and password are required."}), 400
+
+    user = User.query.filter_by(email=email).first()
+    if not user:
+        return jsonify({"error": "No account found with this email."}), 400
+
+    if not user.password_hash:
+        return jsonify({"error": "This account uses Google sign-in. Please sign in with Google."}), 400
+
+    if not user.check_password(password):
+        return jsonify({"error": "Incorrect password."}), 400
+
+    session["user"] = {
+        "id": user.id,
+        "name": user.name,
+        "email": user.email,
+        "picture": user.picture or "",
+    }
+    return jsonify({"success": True, "redirect": url_for("index")})
 
 
 @app.route("/auth/logout")
