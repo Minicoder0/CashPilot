@@ -195,6 +195,16 @@
                 <div class="anomalies-grid" id="anomaliesGrid"></div>
             </div>
 
+            <!-- Entities: Customers & Suppliers -->
+            <div class="entities-container" id="entitiesContainer" style="display:none;">
+                <div class="entities-tabs">
+                    <button class="entity-tab active" data-entity="customers" onclick="switchEntityTab('customers')">👥 Customers</button>
+                    <button class="entity-tab" data-entity="suppliers" onclick="switchEntityTab('suppliers')">🏢 Suppliers</button>
+                </div>
+                <div class="entities-grid" id="customersGrid"></div>
+                <div class="entities-grid" id="suppliersGrid" style="display:none;"></div>
+            </div>
+
             <!-- AI Insights -->
             <div class="insights-container" id="insightsContainer">
                 <div class="section-header">

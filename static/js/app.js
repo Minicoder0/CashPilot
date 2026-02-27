@@ -112,6 +112,7 @@ function renderDashboard() {
     updateSummaryCards();
     renderTransactionTable();
     renderCharts();
+    renderEntities();
     fetchInsights();
 }
 
@@ -306,6 +307,84 @@ function renderAnomalies(anomalies) {
             <div class="anomaly-meta">${a.date} · ${a.category}</div>
         </div>
     `).join('');
+}
+
+// ---- Entities: Customers & Suppliers ----
+
+function buildEntityData(txns, type) {
+    const filtered = txns.filter(t => t.type === type);
+    const totalRevenue = type === 'income'
+        ? filtered.reduce((s, t) => s + t.amount, 0)
+        : filtered.reduce((s, t) => s + Math.abs(t.amount), 0);
+
+    const grouped = {};
+    for (const t of filtered) {
+        const name = t.description.trim().toUpperCase();
+        if (!grouped[name]) {
+            grouped[name] = { name: t.description.trim(), total: 0, count: 0, lastDate: t.date };
+        }
+        grouped[name].total += type === 'income' ? t.amount : Math.abs(t.amount);
+        grouped[name].count += 1;
+        if (t.date > grouped[name].lastDate) grouped[name].lastDate = t.date;
+    }
+
+    return Object.values(grouped)
+        .map(e => ({ ...e, pct: totalRevenue > 0 ? ((e.total / totalRevenue) * 100) : 0 }))
+        .sort((a, b) => b.total - a.total);
+}
+
+function renderEntityCards(entities, gridId, label) {
+    const grid = document.getElementById(gridId);
+    if (!entities.length) {
+        grid.innerHTML = `<div class="entity-empty">No ${label.toLowerCase()} found in transactions.</div>`;
+        return;
+    }
+    grid.innerHTML = entities.map((e, i) => `
+        <div class="entity-card">
+            <div class="entity-rank">#${i + 1}</div>
+            <div class="entity-name">${e.name}</div>
+            <div class="entity-stats">
+                <div class="entity-stat">
+                    <span class="entity-stat-value">${formatCurrency(e.total)}</span>
+                    <span class="entity-stat-label">Total</span>
+                </div>
+                <div class="entity-stat">
+                    <span class="entity-stat-value">${e.count}</span>
+                    <span class="entity-stat-label">Transactions</span>
+                </div>
+                <div class="entity-stat">
+                    <span class="entity-stat-value">${e.pct.toFixed(1)}%</span>
+                    <span class="entity-stat-label">${label === 'Customers' ? '% Revenue' : '% Spend'}</span>
+                </div>
+                <div class="entity-stat">
+                    <span class="entity-stat-value">${formatDate(e.lastDate)}</span>
+                    <span class="entity-stat-label">Last Payment</span>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
+
+function renderEntities() {
+    const container = document.getElementById('entitiesContainer');
+    const customers = buildEntityData(transactions, 'income');
+    const suppliers = buildEntityData(transactions, 'expense');
+
+    if (customers.length === 0 && suppliers.length === 0) {
+        container.style.display = 'none';
+        return;
+    }
+
+    container.style.display = 'block';
+    renderEntityCards(customers, 'customersGrid', 'Customers');
+    renderEntityCards(suppliers, 'suppliersGrid', 'Suppliers');
+}
+
+function switchEntityTab(tab) {
+    document.querySelectorAll('.entity-tab').forEach(t => t.classList.remove('active'));
+    document.querySelector(`.entity-tab[data-entity="${tab}"]`).classList.add('active');
+    document.getElementById('customersGrid').style.display = tab === 'customers' ? 'grid' : 'none';
+    document.getElementById('suppliersGrid').style.display = tab === 'suppliers' ? 'grid' : 'none';
 }
 
 // ---- AI Badge ----
