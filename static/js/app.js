@@ -433,3 +433,48 @@ function updateAIBadge(available) {
     }
 }
 
+// ---- Scroll-Aware Nav Highlighting ----
+
+(function initNavHighlight() {
+    const NAV_LINKS = document.querySelectorAll('.dash-nav-link[href^="#"]');
+    if (!NAV_LINKS.length) return;
+
+    const SECTION_MAP = {};          // sectionId → link element
+    NAV_LINKS.forEach(link => {
+        const id = link.getAttribute('href').slice(1);
+        if (id) SECTION_MAP[id] = link;
+    });
+
+    let currentActive = null;
+
+    function setActive(id) {
+        if (currentActive === id) return;
+        NAV_LINKS.forEach(l => l.classList.remove('active'));
+        if (SECTION_MAP[id]) SECTION_MAP[id].classList.add('active');
+        currentActive = id;
+    }
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) setActive(entry.target.id);
+        });
+    }, {
+        rootMargin: '-120px 0px -60% 0px',   // trigger when section enters top third
+        threshold: 0
+    });
+
+    // Observe when dashboard becomes visible (sections are rendered)
+    const dashEl = document.getElementById('dashboard');
+    if (dashEl) {
+        new MutationObserver((_muts, mo) => {
+            if (dashEl.style.display !== 'none') {
+                Object.keys(SECTION_MAP).forEach(id => {
+                    const sec = document.getElementById(id);
+                    if (sec) observer.observe(sec);
+                });
+                mo.disconnect();
+            }
+        }).observe(dashEl, { attributes: true, attributeFilter: ['style'] });
+    }
+}());
+

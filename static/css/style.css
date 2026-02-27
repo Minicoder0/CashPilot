@@ -1479,16 +1479,15 @@ body {
 
 .dash-nav {
     position: sticky;
-    top: 0;
-    z-index: 50;
+    top: 57px;                          /* sits right below the header */
+    z-index: 90;
     display: flex;
     align-items: center;
     gap: 4px;
     padding: 10px 16px;
     margin: -16px -16px 20px -16px;
-    background: rgba(248, 250, 252, 0.92);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: var(--bg-card);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
     border-bottom: 1px solid var(--border-color);
     overflow-x: auto;
 }
@@ -1509,7 +1508,7 @@ body {
     color: var(--text-primary);
 }
 
-.dash-nav-link:active {
+.dash-nav-link.active {
     background: #3b82f6;
     color: #fff;
 }
@@ -2082,6 +2081,7 @@ body {
 
     /* ---- Sticky Nav ---- */
     .dash-nav {
+        top: 45px;                      /* shorter mobile header */
         gap: 2px;
         padding: 8px 12px;
     }
