@@ -52,7 +52,7 @@ function showToast(message, type = 'info') {
 async function loadDemoData() {
     const btn = document.getElementById('loadDemoBtn');
     btn.disabled = true;
-    showLoading('⚡ AI is analyzing your transactions...');
+    showLoading('Loading demo data...');
 
     try {
         const res = await fetch('/api/demo-data');
@@ -78,7 +78,7 @@ async function handleCSVUpload(event) {
     const file = event.target.files[0];
     if (!file) return;
 
-    showLoading('⚡ AI is analyzing your transactions...');
+    showLoading('Uploading transactions...');
 
     try {
         const formData = new FormData();
