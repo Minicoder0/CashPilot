@@ -317,14 +317,33 @@ const ENTITY_PREFIXES = [
     'DIRECT DEPOSIT - ', 'WIRE FROM ', 'WIRE TO ',
 ];
 
-function cleanEntityName(desc) {
+const MONTH_NAMES = 'JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|SEPT|OCT|NOV|DEC';
+// Matches trailing patterns like "- SEPT", "- OCT 2025", "- SEP 4", "- Q3 2025"
+const TRAILING_DATE_RE = new RegExp(
+    `\\s*[-–]\\s*(?:${MONTH_NAMES})(?:\\s+\\d{1,4})?\\s*$`, 'i'
+);
+// Matches trailing person names after PAYROLL like "- JOHN SMITH"
+const PAYROLL_SUFFIX_RE = /\s*[-–]\s+[A-Z][a-z]+(?:\s+[A-Z][a-z]+)*\s*$/;
+
+function cleanEntityName(desc, category) {
     let name = desc.trim();
+
+    // Strip common prefixes
     for (const prefix of ENTITY_PREFIXES) {
         if (name.toUpperCase().startsWith(prefix)) {
             name = name.slice(prefix.length).trim();
             break;
         }
     }
+
+    // Group all payroll entries under one name
+    if ((category || '').toLowerCase() === 'payroll' || name.toUpperCase().startsWith('PAYROLL')) {
+        return 'Payroll';
+    }
+
+    // Strip trailing month / date suffixes
+    name = name.replace(TRAILING_DATE_RE, '').trim();
+
     return name || desc.trim();
 }
 
@@ -336,7 +355,7 @@ function buildEntityData(txns, type) {
 
     const grouped = {};
     for (const t of filtered) {
-        const cleaned = cleanEntityName(t.description);
+        const cleaned = cleanEntityName(t.description, t.category);
         const key = cleaned.toUpperCase();
         if (!grouped[key]) {
             grouped[key] = { name: cleaned, total: 0, count: 0, lastDate: t.date };
@@ -351,36 +370,32 @@ function buildEntityData(txns, type) {
         .sort((a, b) => b.total - a.total);
 }
 
-function renderEntityCards(entities, gridId, label) {
+const ENTITY_MAX_ROWS = 6;
+
+function renderEntityList(entities, gridId, label) {
     const grid = document.getElementById(gridId);
     if (!entities.length) {
-        grid.innerHTML = `<div class="entity-empty">No ${label.toLowerCase()} found in transactions.</div>`;
+        grid.innerHTML = `<div class="entity-empty">No ${label.toLowerCase()} found.</div>`;
         return;
     }
-    grid.innerHTML = entities.map((e, i) => `
-        <div class="entity-card">
-            <div class="entity-rank">#${i + 1}</div>
-            <div class="entity-name">${e.name}</div>
-            <div class="entity-stats">
-                <div class="entity-stat">
-                    <span class="entity-stat-value">${formatCurrency(e.total)}</span>
-                    <span class="entity-stat-label">Total</span>
-                </div>
-                <div class="entity-stat">
-                    <span class="entity-stat-value">${e.count}</span>
-                    <span class="entity-stat-label">Transactions</span>
-                </div>
-                <div class="entity-stat">
-                    <span class="entity-stat-value">${e.pct.toFixed(1)}%</span>
-                    <span class="entity-stat-label">${label === 'Customers' ? '% Revenue' : '% Spend'}</span>
-                </div>
-                <div class="entity-stat">
-                    <span class="entity-stat-value">${formatDate(e.lastDate)}</span>
-                    <span class="entity-stat-label">Last Payment</span>
-                </div>
-            </div>
+
+    const visible = entities.slice(0, ENTITY_MAX_ROWS);
+    const remaining = entities.length - ENTITY_MAX_ROWS;
+
+    let html = visible.map((e, i) => `
+        <div class="entity-row">
+            <span class="entity-rank">${i + 1}</span>
+            <span class="entity-name">${e.name}</span>
+            <span class="entity-count">${e.count} txn${e.count !== 1 ? 's' : ''}</span>
+            <span class="entity-total">${formatCurrency(e.total)}</span>
         </div>
     `).join('');
+
+    if (remaining > 0) {
+        html += `<div class="entity-more">+ ${remaining} more</div>`;
+    }
+
+    grid.innerHTML = html;
 }
 
 function renderEntities() {
@@ -394,15 +409,15 @@ function renderEntities() {
     }
 
     container.style.display = 'block';
-    renderEntityCards(customers, 'customersGrid', 'Customers');
-    renderEntityCards(suppliers, 'suppliersGrid', 'Suppliers');
+    renderEntityList(customers, 'customersGrid', 'Customers');
+    renderEntityList(suppliers, 'suppliersGrid', 'Suppliers');
 }
 
 function switchEntityTab(tab) {
     document.querySelectorAll('.entity-tab').forEach(t => t.classList.remove('active'));
     document.querySelector(`.entity-tab[data-entity="${tab}"]`).classList.add('active');
-    document.getElementById('customersGrid').style.display = tab === 'customers' ? 'grid' : 'none';
-    document.getElementById('suppliersGrid').style.display = tab === 'suppliers' ? 'grid' : 'none';
+    document.getElementById('customersGrid').style.display = tab === 'customers' ? '' : 'none';
+    document.getElementById('suppliersGrid').style.display = tab === 'suppliers' ? '' : 'none';
 }
 
 // ---- AI Badge ----

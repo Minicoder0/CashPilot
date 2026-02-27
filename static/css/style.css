@@ -1405,78 +1405,71 @@ body {
 }
 
 .entities-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
 }
 
-.entity-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-lg);
-    padding: 20px;
-    position: relative;
-    transition: all 0.2s ease;
-    box-shadow: var(--shadow-sm);
+.entity-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 4px;
+    border-bottom: 1px solid var(--border-color);
 }
 
-.entity-card:hover {
-    box-shadow: var(--shadow-md);
-    transform: translateY(-2px);
+.entity-row:last-child {
+    border-bottom: none;
 }
 
 .entity-rank {
-    position: absolute;
-    top: 12px;
-    right: 16px;
-    font-size: 0.72rem;
+    width: 24px;
+    font-size: 0.78rem;
     font-weight: 700;
     color: var(--text-muted);
-    background: var(--bg-secondary);
-    padding: 2px 8px;
-    border-radius: 999px;
+    text-align: center;
+    flex-shrink: 0;
 }
 
 .entity-name {
-    font-size: 1rem;
-    font-weight: 700;
+    flex: 1;
+    font-size: 0.88rem;
+    font-weight: 600;
     color: var(--text-primary);
-    margin-bottom: 14px;
-    padding-right: 40px;
-    word-break: break-word;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.entity-stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-}
-
-.entity-stat {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-.entity-stat-value {
-    font-size: 0.92rem;
-    font-weight: 700;
-    color: var(--text-primary);
-}
-
-.entity-stat-label {
-    font-size: 0.7rem;
+.entity-count {
+    font-size: 0.72rem;
     color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.entity-total {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    white-space: nowrap;
+    flex-shrink: 0;
+    text-align: right;
+    min-width: 90px;
+}
+
+.entity-more {
+    padding: 8px 4px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-align: center;
 }
 
 .entity-empty {
-    grid-column: 1 / -1;
     text-align: center;
-    padding: 40px 20px;
+    padding: 24px 12px;
     color: var(--text-muted);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
 }
 
 
