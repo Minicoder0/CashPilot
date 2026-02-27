@@ -52,7 +52,7 @@ function showToast(message, type = 'info') {
 async function loadDemoData() {
     const btn = document.getElementById('loadDemoBtn');
     btn.disabled = true;
-    showLoading('Loading demo data & categorizing with AI...');
+    showLoading('⚡ AI is analyzing your transactions...');
 
     try {
         const res = await fetch('/api/demo-data');
@@ -78,7 +78,7 @@ async function handleCSVUpload(event) {
     const file = event.target.files[0];
     if (!file) return;
 
-    showLoading('Uploading & analyzing your transactions...');
+    showLoading('⚡ AI is analyzing your transactions...');
 
     try {
         const formData = new FormData();
@@ -112,7 +112,6 @@ function renderDashboard() {
     updateSummaryCards();
     renderTransactionTable();
     renderCharts();
-    renderEntities();
     fetchInsights();
 }
 
@@ -309,116 +308,6 @@ function renderAnomalies(anomalies) {
     `).join('');
 }
 
-// ---- Entities: Customers & Suppliers ----
-
-const ENTITY_PREFIXES = [
-    'TRANSFER FROM ', 'CLIENT PAYMENT - ', 'FREELANCE PAYMENT - ',
-    'PAYMENT FROM ', 'INVOICE - ', 'PAYMENT TO ', 'TRANSFER TO ',
-    'DIRECT DEPOSIT - ', 'WIRE FROM ', 'WIRE TO ',
-];
-
-const MONTH_NAMES = 'JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|SEPT|OCT|NOV|DEC';
-// Matches trailing patterns like "- SEPT", "- OCT 2025", "- SEP 4", "- Q3 2025"
-const TRAILING_DATE_RE = new RegExp(
-    `\\s*[-–]\\s*(?:${MONTH_NAMES})(?:\\s+\\d{1,4})?\\s*$`, 'i'
-);
-// Matches trailing person names after PAYROLL like "- JOHN SMITH"
-const PAYROLL_SUFFIX_RE = /\s*[-–]\s+[A-Z][a-z]+(?:\s+[A-Z][a-z]+)*\s*$/;
-
-function cleanEntityName(desc, category) {
-    let name = desc.trim();
-
-    // Strip common prefixes
-    for (const prefix of ENTITY_PREFIXES) {
-        if (name.toUpperCase().startsWith(prefix)) {
-            name = name.slice(prefix.length).trim();
-            break;
-        }
-    }
-
-    // Group all payroll entries under one name
-    if ((category || '').toLowerCase() === 'payroll' || name.toUpperCase().startsWith('PAYROLL')) {
-        return 'Payroll';
-    }
-
-    // Strip trailing month / date suffixes
-    name = name.replace(TRAILING_DATE_RE, '').trim();
-
-    return name || desc.trim();
-}
-
-function buildEntityData(txns, type) {
-    const filtered = txns.filter(t => t.type === type);
-    const totalRevenue = type === 'income'
-        ? filtered.reduce((s, t) => s + t.amount, 0)
-        : filtered.reduce((s, t) => s + Math.abs(t.amount), 0);
-
-    const grouped = {};
-    for (const t of filtered) {
-        const cleaned = cleanEntityName(t.description, t.category);
-        const key = cleaned.toUpperCase();
-        if (!grouped[key]) {
-            grouped[key] = { name: cleaned, total: 0, count: 0, lastDate: t.date };
-        }
-        grouped[key].total += type === 'income' ? t.amount : Math.abs(t.amount);
-        grouped[key].count += 1;
-        if (t.date > grouped[key].lastDate) grouped[key].lastDate = t.date;
-    }
-
-    return Object.values(grouped)
-        .map(e => ({ ...e, pct: totalRevenue > 0 ? ((e.total / totalRevenue) * 100) : 0 }))
-        .sort((a, b) => b.total - a.total);
-}
-
-const ENTITY_MAX_ROWS = 6;
-
-function renderEntityList(entities, gridId, label) {
-    const grid = document.getElementById(gridId);
-    if (!entities.length) {
-        grid.innerHTML = `<div class="entity-empty">No ${label.toLowerCase()} found.</div>`;
-        return;
-    }
-
-    const visible = entities.slice(0, ENTITY_MAX_ROWS);
-    const remaining = entities.length - ENTITY_MAX_ROWS;
-
-    let html = visible.map((e, i) => `
-        <div class="entity-row">
-            <span class="entity-rank">${i + 1}</span>
-            <span class="entity-name">${e.name}</span>
-            <span class="entity-count">${e.count} txn${e.count !== 1 ? 's' : ''}</span>
-            <span class="entity-total">${formatCurrency(e.total)}</span>
-        </div>
-    `).join('');
-
-    if (remaining > 0) {
-        html += `<div class="entity-more">+ ${remaining} more</div>`;
-    }
-
-    grid.innerHTML = html;
-}
-
-function renderEntities() {
-    const container = document.getElementById('entitiesContainer');
-    const customers = buildEntityData(transactions, 'income');
-    const suppliers = buildEntityData(transactions, 'expense');
-
-    if (customers.length === 0 && suppliers.length === 0) {
-        container.style.display = 'none';
-        return;
-    }
-
-    container.style.display = 'block';
-    renderEntityList(customers, 'customersGrid', 'Customers');
-    renderEntityList(suppliers, 'suppliersGrid', 'Suppliers');
-}
-
-function switchEntityTab(tab) {
-    document.querySelectorAll('.entity-tab').forEach(t => t.classList.remove('active'));
-    document.querySelector(`.entity-tab[data-entity="${tab}"]`).classList.add('active');
-    document.getElementById('customersGrid').style.display = tab === 'customers' ? '' : 'none';
-    document.getElementById('suppliersGrid').style.display = tab === 'suppliers' ? '' : 'none';
-}
 
 // ---- AI Badge ----
 
@@ -433,48 +322,5 @@ function updateAIBadge(available) {
     }
 }
 
-// ---- Scroll-Aware Nav Highlighting ----
 
-(function initNavHighlight() {
-    const NAV_LINKS = document.querySelectorAll('.dash-nav-link[href^="#"]');
-    if (!NAV_LINKS.length) return;
-
-    const SECTION_MAP = {};          // sectionId → link element
-    NAV_LINKS.forEach(link => {
-        const id = link.getAttribute('href').slice(1);
-        if (id) SECTION_MAP[id] = link;
-    });
-
-    let currentActive = null;
-
-    function setActive(id) {
-        if (currentActive === id) return;
-        NAV_LINKS.forEach(l => l.classList.remove('active'));
-        if (SECTION_MAP[id]) SECTION_MAP[id].classList.add('active');
-        currentActive = id;
-    }
-
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) setActive(entry.target.id);
-        });
-    }, {
-        rootMargin: '-120px 0px -60% 0px',   // trigger when section enters top third
-        threshold: 0
-    });
-
-    // Observe when dashboard becomes visible (sections are rendered)
-    const dashEl = document.getElementById('dashboard');
-    if (dashEl) {
-        new MutationObserver((_muts, mo) => {
-            if (dashEl.style.display !== 'none') {
-                Object.keys(SECTION_MAP).forEach(id => {
-                    const sec = document.getElementById(id);
-                    if (sec) observer.observe(sec);
-                });
-                mo.disconnect();
-            }
-        }).observe(dashEl, { attributes: true, attributeFilter: ['style'] });
-    }
-}());
 

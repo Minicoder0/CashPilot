@@ -1103,6 +1103,18 @@ body {
     font-size: 0.95rem;
 }
 
+.loading-hint {
+    margin-top: 8px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+}
+
 
 /* ===============================================
    Toast Notifications
