@@ -22,16 +22,28 @@ app.secret_key = os.getenv("FLASK_SECRET_KEY", secrets.token_hex(32))
 app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
 
 # ---- Persistence config ----
-database_url = os.getenv("DATABASE_URL", "sqlite:///cashpilot.db")
+# Railway may expose the DB URL under different variable names
+database_url = (
+    os.getenv("DATABASE_URL")
+    or os.getenv("DATABASE_PRIVATE_URL")
+    or os.getenv("DATABASE_PUBLIC_URL")
+    or "sqlite:///cashpilot.db"
+)
 if database_url.startswith("postgres://"):
     database_url = database_url.replace("postgres://", "postgresql://", 1)
+
+print(f"[DB] Using database: {database_url[:30]}...")
 
 app.config["SQLALCHEMY_DATABASE_URI"] = database_url
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db.init_app(app)
 
 with app.app_context():
-    db.create_all()
+    try:
+        db.create_all()
+        print("[DB] Tables created successfully")
+    except Exception as e:
+        print(f"[DB] Error creating tables: {e}")
 
 # ---- Session cookie config for HTTPS behind Railway proxy ----
 app.config["SESSION_COOKIE_SECURE"] = True
@@ -344,6 +356,12 @@ The user's question: {message}"""
         mimetype="text/event-stream",
         headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
     )
+
+
+@app.route("/health")
+def health_check():
+    """Health check endpoint for Railway."""
+    return jsonify({"status": "ok"}), 200
 
 
 if __name__ == "__main__":
