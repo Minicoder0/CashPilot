@@ -311,6 +311,23 @@ function renderAnomalies(anomalies) {
 
 // ---- Entities: Customers & Suppliers ----
 
+const ENTITY_PREFIXES = [
+    'TRANSFER FROM ', 'CLIENT PAYMENT - ', 'FREELANCE PAYMENT - ',
+    'PAYMENT FROM ', 'INVOICE - ', 'PAYMENT TO ', 'TRANSFER TO ',
+    'DIRECT DEPOSIT - ', 'WIRE FROM ', 'WIRE TO ',
+];
+
+function cleanEntityName(desc) {
+    let name = desc.trim();
+    for (const prefix of ENTITY_PREFIXES) {
+        if (name.toUpperCase().startsWith(prefix)) {
+            name = name.slice(prefix.length).trim();
+            break;
+        }
+    }
+    return name || desc.trim();
+}
+
 function buildEntityData(txns, type) {
     const filtered = txns.filter(t => t.type === type);
     const totalRevenue = type === 'income'
@@ -319,13 +336,14 @@ function buildEntityData(txns, type) {
 
     const grouped = {};
     for (const t of filtered) {
-        const name = t.description.trim().toUpperCase();
-        if (!grouped[name]) {
-            grouped[name] = { name: t.description.trim(), total: 0, count: 0, lastDate: t.date };
+        const cleaned = cleanEntityName(t.description);
+        const key = cleaned.toUpperCase();
+        if (!grouped[key]) {
+            grouped[key] = { name: cleaned, total: 0, count: 0, lastDate: t.date };
         }
-        grouped[name].total += type === 'income' ? t.amount : Math.abs(t.amount);
-        grouped[name].count += 1;
-        if (t.date > grouped[name].lastDate) grouped[name].lastDate = t.date;
+        grouped[key].total += type === 'income' ? t.amount : Math.abs(t.amount);
+        grouped[key].count += 1;
+        if (t.date > grouped[key].lastDate) grouped[key].lastDate = t.date;
     }
 
     return Object.values(grouped)

@@ -108,6 +108,15 @@
 
         <!-- Dashboard (hidden until data is loaded) -->
         <section class="dashboard" id="dashboard" style="display:none;">
+            <!-- Sticky Nav Jump Links -->
+            <nav class="dash-nav" id="dashNav">
+                <a href="#healthScoreSection" class="dash-nav-link">Dashboard</a>
+                <a href="#entitiesContainer" class="dash-nav-link">Entities</a>
+                <a href="#insightsContainer" class="dash-nav-link">Insights</a>
+                <a href="#transactionsContainer" class="dash-nav-link">Transactions</a>
+                <a href="#chatContainer" class="dash-nav-link" onclick="event.preventDefault();toggleChat()">Chat</a>
+            </nav>
+
             <!-- Health Score Gauge -->
             <div class="health-score-section" id="healthScoreSection">
                 <div class="health-gauge">
@@ -197,6 +206,10 @@
 
             <!-- Entities: Customers & Suppliers -->
             <div class="entities-container" id="entitiesContainer" style="display:none;">
+                <div class="section-header">
+                    <h2>👥 Customers & Suppliers</h2>
+                    <span class="section-subtitle">Who pays you and where your money goes</span>
+                </div>
                 <div class="entities-tabs">
                     <button class="entity-tab active" data-entity="customers" onclick="switchEntityTab('customers')">👥 Customers</button>
                     <button class="entity-tab" data-entity="suppliers" onclick="switchEntityTab('suppliers')">🏢 Suppliers</button>
