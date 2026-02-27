@@ -13,12 +13,25 @@ from services.category_service import categorize_transactions, categorize_with_r
 from services.insight_service import generate_insights, build_summary, calculate_health_score, calculate_runway, detect_anomalies
 from services.ai_service import call_ai_streaming, is_ai_available
 from services.openai_service import analyze_transactions, is_openai_available
+from models import db, User, Transaction
 
 load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = os.getenv("FLASK_SECRET_KEY", secrets.token_hex(32))
 app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
+
+# ---- Persistence config ----
+database_url = os.getenv("DATABASE_URL", "sqlite:///cashpilot.db")
+if database_url.startswith("postgres://"):
+    database_url = database_url.replace("postgres://", "postgresql://", 1)
+
+app.config["SQLALCHEMY_DATABASE_URI"] = database_url
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+db.init_app(app)
+
+with app.app_context():
+    db.create_all()
 
 # ---- Session cookie config for HTTPS behind Railway proxy ----
 app.config["SESSION_COOKIE_SECURE"] = True
@@ -36,8 +49,20 @@ google = oauth.register(
     client_kwargs={"scope": "openid email profile"},
 )
 
-# In-memory store for demo
-transactions_store: list[dict] = []
+# ---- DB Access Helper ----
+
+def get_db_user():
+    user_info = session.get("user")
+    if user_info and "email" in user_info:
+        return User.query.filter_by(email=user_info["email"]).first()
+    return None
+
+def get_user_transactions():
+    user = get_db_user()
+    if user:
+        txns = Transaction.query.filter_by(user_id=user.id).order_by(Transaction.date.desc()).all()
+        return [t.to_dict() for t in txns]
+    return []
 
 
 def login_required(f):
@@ -76,10 +101,29 @@ def auth_callback():
     token = google.authorize_access_token()
     user_info = token.get("userinfo")
     if user_info:
+        email = user_info.get("email", "")
+        # Find or create user
+        user = User.query.filter_by(email=email).first()
+        if not user:
+            user = User(
+                google_id=user_info.get("sub"), # 'sub' is standard for google OpenID
+                email=email,
+                name=user_info.get("name", "User"),
+                picture=user_info.get("picture", "")
+            )
+            db.session.add(user)
+            db.session.commit()
+        else:
+            # Update info just in case
+            user.name = user_info.get("name", user.name)
+            user.picture = user_info.get("picture", user.picture)
+            db.session.commit()
+
         session["user"] = {
-            "name": user_info.get("name", "User"),
-            "email": user_info.get("email", ""),
-            "picture": user_info.get("picture", ""),
+            "id": user.id, # Keep DB ID for easier joins
+            "name": user.name,
+            "email": user.email,
+            "picture": user.picture,
         }
     return redirect(url_for("index"))
 
@@ -110,20 +154,46 @@ def get_user():
 @app.route("/api/demo-data")
 @login_required
 def demo_data():
-    """Load and return demo transactions (pre-categorized)."""
-    global transactions_store
+    """Load and return demo transactions (pre-categorized) to DB."""
+    user = get_db_user()
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+
     data_path = os.path.join(os.path.dirname(__file__), "data", "demo_transactions.json")
     with open(data_path, "r") as f:
         raw = json.load(f)
-    transactions_store = categorize_transactions(raw)
-    return jsonify({"transactions": transactions_store, "ai_available": is_ai_available()})
+
+    # Categorize raw data
+    categorized = categorize_transactions(raw)
+
+    # Clear old data for this user
+    Transaction.query.filter_by(user_id=user.id).delete()
+
+    # Save to DB
+    for txn_dict in categorized:
+        new_txn = Transaction(
+            user_id=user.id,
+            date=txn_dict["date"],
+            description=txn_dict["description"],
+            amount=txn_dict["amount"],
+            category=txn_dict["category"],
+            type=txn_dict["type"]
+        )
+        db.session.add(new_txn)
+    db.session.commit()
+
+    txns = [t.to_dict() for t in Transaction.query.filter_by(user_id=user.id).all()]
+    return jsonify({"transactions": txns, "ai_available": is_ai_available()})
 
 
 @app.route("/api/upload", methods=["POST"])
 @login_required
 def upload_csv():
-    """Parse uploaded CSV and categorize transactions."""
-    global transactions_store
+    """Parse uploaded CSV, categorize, and save to DB."""
+    user = get_db_user()
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+
     file = request.files.get("file")
     if not file:
         return jsonify({"error": "No file provided"}), 400
@@ -154,7 +224,6 @@ def upload_csv():
                 amount = abs(amount)
 
             raw.append({
-                "id": i + 1,
                 "date": row_lower["date"],
                 "description": row_lower["description"],
                 "amount": amount,
@@ -163,10 +232,32 @@ def upload_csv():
         if not raw:
             return jsonify({"error": "CSV file is empty"}), 400
 
-        transactions_store = categorize_transactions(raw)
-        return jsonify({"transactions": transactions_store, "count": len(transactions_store), "ai_available": is_ai_available()})
+        # Categorize
+        categorized = categorize_transactions(raw)
+
+        # Append to user's transactions (don't clear by default for upload?)
+        # For simplicity in this demo, it's safer to append, but user might want to clear.
+        # Let's keep existing behavior if it replaced it before.
+        # From original: it replaced 'transactions_store'. So we'll clear.
+        Transaction.query.filter_by(user_id=user.id).delete()
+
+        for t in categorized:
+            new_txn = Transaction(
+                user_id=user.id,
+                date=t.get("date"),
+                description=t.get("description"),
+                amount=t.get("amount"),
+                category=t.get("category"),
+                type=t.get("type")
+            )
+            db.session.add(new_txn)
+        db.session.commit()
+
+        txns = [t.to_dict() for t in Transaction.query.filter_by(user_id=user.id).all()]
+        return jsonify({"transactions": txns, "count": len(txns), "ai_available": is_ai_available()})
 
     except Exception as e:
+        db.session.rollback()
         return jsonify({"error": f"Failed to parse CSV: {str(e)}"}), 400
 
 
@@ -175,7 +266,7 @@ def upload_csv():
 def get_insights():
     """Generate AI financial insights for current transactions."""
     data = request.get_json() or {}
-    txns = data.get("transactions", transactions_store)
+    txns = data.get("transactions", get_user_transactions())
     if not txns:
         return jsonify({"error": "No transactions loaded"}), 400
 
@@ -196,9 +287,9 @@ def get_insights():
 @app.route("/api/analyze", methods=["POST"])
 @login_required
 def analyze():
-    """Analyze transactions using OpenAI gpt-4.1-mini."""
+    """Analyze transactions using OpenAI."""
     data = request.get_json() or {}
-    txns = data.get("transactions", transactions_store)
+    txns = data.get("transactions", get_user_transactions())
     if not txns:
         return jsonify({"error": "No transactions loaded"}), 400
 
@@ -214,7 +305,7 @@ def chat():
     """Chat with AI about finances — streaming response."""
     data = request.get_json() or {}
     message = data.get("message", "")
-    txns = data.get("transactions", transactions_store)
+    txns = data.get("transactions", get_user_transactions())
 
     if not message:
         return jsonify({"error": "No message provided"}), 400

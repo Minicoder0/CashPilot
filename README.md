@@ -29,6 +29,7 @@ CashPilot turns raw CSV bank statements into **actionable financial insights** i
 |-------|-----------|
 | **Backend** | Python, Flask, Gunicorn |
 | **AI** | OpenAI GPT-4.1-mini |
+| **Database** | PostgreSQL + SQLAlchemy |
 | **Frontend** | Vanilla HTML/CSS/JS |
 | **Charts** | Chart.js |
 | **Auth** | Google OAuth 2.0 (Authlib) |
@@ -94,6 +95,7 @@ date,description,amount,type
 ```
 CashPilot/
 ├── app.py                    # Flask app + routes + Google OAuth
+├── models.py                 # SQLAlchemy DB models (User + Transaction)
 ├── Procfile                  # Railway/Gunicorn config
 ├── requirements.txt          # Python dependencies
 ├── .env                      # API keys (not in repo)

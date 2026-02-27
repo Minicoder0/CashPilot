@@ -1,0 +1,451 @@
+date,description,amount,type
+2024-01-01,Broken Equipment,1048.91,expense
+2024-01-01,Refund Received,438.58,income
+2024-01-03,Office Spoilage,2145.28,expense
+2024-01-03,Small Gig,214.65,income
+2024-01-05,Broken Equipment,2303.55,expense
+2024-01-06,Legal Fees,2217.54,expense
+2024-01-06,Refund Received,409.19,income
+2024-01-08,Small Gig,201.27,income
+2024-01-09,Emergency Loan Payment,1235.08,expense
+2024-01-11,Emergency Loan Payment,2960.91,expense
+2024-01-11,Office Rent,1027.46,expense
+2024-01-12,Overdue Tax,1176.65,expense
+2024-01-13,Legal Fees,1127.23,expense
+2024-01-14,Office Rent,882.70,expense
+2024-01-14,Overdue Tax,1009.93,expense
+2024-01-15,Refund Received,193.11,income
+2024-01-16,Emergency Loan Payment,746.01,expense
+2024-01-17,Refund Received,698.21,income
+2024-01-17,Office Rent,1315.64,expense
+2024-01-17,Late Client Payment,574.64,income
+2024-01-17,Overdue Tax,2499.35,expense
+2024-01-18,Marketing Disaster,1571.56,expense
+2024-01-18,Legal Fees,1628.83,expense
+2024-01-18,Marketing Disaster,2223.85,expense
+2024-01-20,Refund Received,354.61,income
+2024-01-20,MASSIVE EMERGENCY LOAN PAYMENT SURCHARGE,16563.25,expense
+2024-01-21,Emergency Loan Payment,1836.27,expense
+2024-01-22,Office Rent,1012.61,expense
+2024-01-23,Broken Equipment,2728.17,expense
+2024-01-24,MASSIVE SERVER PENALTY SURCHARGE,16856.22,expense
+2024-01-25,Small Gig,512.12,income
+2024-01-25,Broken Equipment,1401.79,expense
+2024-01-26,Marketing Disaster,622.75,expense
+2024-01-26,Refund Received,336.24,income
+2024-01-28,Legal Fees,2594.61,expense
+2024-01-29,Emergency Loan Payment,765.60,expense
+2024-01-30,Marketing Disaster,2114.10,expense
+2024-01-31,Overdue Tax,2740.64,expense
+2024-02-01,Emergency Loan Payment,1456.92,expense
+2024-02-02,Emergency Loan Payment,2578.00,expense
+2024-02-03,Overdue Tax,622.72,expense
+2024-02-03,Overdue Tax,2671.23,expense
+2024-02-03,Legal Fees,2914.38,expense
+2024-02-03,Office Spoilage,1334.76,expense
+2024-02-04,Marketing Disaster,907.72,expense
+2024-02-05,Legal Fees,1663.75,expense
+2024-02-05,Server Penalty,891.27,expense
+2024-02-07,Emergency Loan Payment,1683.31,expense
+2024-02-07,Emergency Loan Payment,2897.44,expense
+2024-02-09,Emergency Loan Payment,2036.77,expense
+2024-02-09,Small Gig,632.89,income
+2024-02-09,Small Gig,226.08,income
+2024-02-11,MASSIVE LEGAL FEES SURCHARGE,11910.02,expense
+2024-02-12,Small Gig,480.09,income
+2024-02-13,Marketing Disaster,2904.35,expense
+2024-02-14,Emergency Loan Payment,1176.06,expense
+2024-02-15,Server Penalty,820.35,expense
+2024-02-15,Broken Equipment,1684.72,expense
+2024-02-17,Server Penalty,1774.04,expense
+2024-02-18,Refund Received,471.61,income
+2024-02-18,Office Spoilage,1328.90,expense
+2024-02-18,MASSIVE OFFICE RENT SURCHARGE,19621.02,expense
+2024-02-20,Legal Fees,857.72,expense
+2024-02-21,Marketing Disaster,2044.46,expense
+2024-02-22,Office Rent,2720.55,expense
+2024-02-22,Marketing Disaster,2918.14,expense
+2024-02-24,Legal Fees,1462.56,expense
+2024-02-25,Overdue Tax,2458.43,expense
+2024-02-27,Server Penalty,2147.88,expense
+2024-02-28,Broken Equipment,2358.35,expense
+2024-02-29,Server Penalty,2754.06,expense
+2024-03-01,Server Penalty,2636.74,expense
+2024-03-01,Marketing Disaster,1131.47,expense
+2024-03-03,Refund Received,84.52,income
+2024-03-04,Server Penalty,2430.22,expense
+2024-03-04,Overdue Tax,2684.91,expense
+2024-03-05,Office Rent,2772.04,expense
+2024-03-05,Broken Equipment,1545.40,expense
+2024-03-05,Server Penalty,2745.34,expense
+2024-03-05,Broken Equipment,1528.63,expense
+2024-03-06,Marketing Disaster,2644.75,expense
+2024-03-07,Emergency Loan Payment,517.01,expense
+2024-03-09,Office Spoilage,633.14,expense
+2024-03-09,Office Rent,2472.96,expense
+2024-03-09,MASSIVE SERVER PENALTY SURCHARGE,19469.60,expense
+2024-03-10,Emergency Loan Payment,2719.82,expense
+2024-03-11,Marketing Disaster,1968.02,expense
+2024-03-13,Office Spoilage,2846.40,expense
+2024-03-14,Office Spoilage,1870.15,expense
+2024-03-14,Legal Fees,1283.20,expense
+2024-03-15,Refund Received,293.68,income
+2024-03-17,Emergency Loan Payment,698.20,expense
+2024-03-17,Office Rent,2081.64,expense
+2024-03-17,Emergency Loan Payment,1009.12,expense
+2024-03-17,MASSIVE OFFICE SPOILAGE SURCHARGE,11207.20,expense
+2024-03-18,Office Spoilage,2231.75,expense
+2024-03-18,Emergency Loan Payment,2339.53,expense
+2024-03-18,Marketing Disaster,1842.90,expense
+2024-03-20,Emergency Loan Payment,2136.25,expense
+2024-03-21,Legal Fees,1814.29,expense
+2024-03-22,Emergency Loan Payment,1768.67,expense
+2024-03-23,Legal Fees,2929.15,expense
+2024-03-23,MASSIVE OFFICE RENT SURCHARGE,10959.50,expense
+2024-03-25,MASSIVE OVERDUE TAX SURCHARGE,11353.55,expense
+2024-03-26,Small Gig,255.11,income
+2024-03-28,Overdue Tax,2724.82,expense
+2024-03-30,Overdue Tax,1658.98,expense
+2024-03-30,Broken Equipment,1776.06,expense
+2024-03-31,Office Rent,2729.96,expense
+2024-04-01,Server Penalty,1388.23,expense
+2024-04-03,Marketing Disaster,2707.33,expense
+2024-04-05,Late Client Payment,400.71,income
+2024-04-07,Overdue Tax,1597.52,expense
+2024-04-09,Office Spoilage,1551.69,expense
+2024-04-09,Office Rent,2179.82,expense
+2024-04-10,Marketing Disaster,1866.45,expense
+2024-04-10,Legal Fees,2430.92,expense
+2024-04-11,Broken Equipment,1905.35,expense
+2024-04-13,Legal Fees,1308.71,expense
+2024-04-13,Office Rent,1867.19,expense
+2024-04-15,Emergency Loan Payment,2020.56,expense
+2024-04-15,Overdue Tax,2518.00,expense
+2024-04-15,Overdue Tax,1363.12,expense
+2024-04-15,Late Client Payment,157.65,income
+2024-04-16,Office Spoilage,2886.33,expense
+2024-04-18,Marketing Disaster,2042.59,expense
+2024-04-19,Refund Received,150.68,income
+2024-04-21,Small Gig,297.41,income
+2024-04-21,Legal Fees,2484.86,expense
+2024-04-21,Broken Equipment,1877.14,expense
+2024-04-21,MASSIVE MARKETING DISASTER SURCHARGE,21539.52,expense
+2024-04-23,Overdue Tax,1020.70,expense
+2024-04-25,Refund Received,92.08,income
+2024-04-27,MASSIVE SERVER PENALTY SURCHARGE,10696.30,expense
+2024-04-28,Refund Received,344.36,income
+2024-04-30,Broken Equipment,763.94,expense
+2024-05-02,Office Rent,1351.08,expense
+2024-05-02,Broken Equipment,1962.85,expense
+2024-05-03,Server Penalty,2619.31,expense
+2024-05-03,Server Penalty,2496.59,expense
+2024-05-04,Marketing Disaster,2915.86,expense
+2024-05-04,Broken Equipment,1353.08,expense
+2024-05-05,Server Penalty,1099.71,expense
+2024-05-05,Emergency Loan Payment,1968.90,expense
+2024-05-05,Server Penalty,1739.41,expense
+2024-05-06,Overdue Tax,1128.64,expense
+2024-05-08,Small Gig,461.44,income
+2024-05-09,Small Gig,61.57,income
+2024-05-09,Broken Equipment,1473.33,expense
+2024-05-11,Legal Fees,1177.49,expense
+2024-05-13,Refund Received,75.18,income
+2024-05-13,Overdue Tax,758.47,expense
+2024-05-14,Legal Fees,2496.57,expense
+2024-05-16,Overdue Tax,2182.64,expense
+2024-05-18,Marketing Disaster,2119.21,expense
+2024-05-18,Overdue Tax,662.70,expense
+2024-05-20,Marketing Disaster,810.97,expense
+2024-05-22,Marketing Disaster,2830.55,expense
+2024-05-24,Small Gig,274.13,income
+2024-05-25,Server Penalty,1210.55,expense
+2024-05-26,Broken Equipment,1146.02,expense
+2024-05-27,Office Rent,2400.54,expense
+2024-05-29,Legal Fees,1426.18,expense
+2024-05-31,Server Penalty,2768.47,expense
+2024-06-01,Server Penalty,1254.61,expense
+2024-06-03,Refund Received,304.75,income
+2024-06-05,Office Rent,2403.82,expense
+2024-06-05,Marketing Disaster,2832.99,expense
+2024-06-07,Late Client Payment,259.40,income
+2024-06-08,Late Client Payment,61.45,income
+2024-06-08,Broken Equipment,2245.09,expense
+2024-06-10,Broken Equipment,1428.84,expense
+2024-06-11,Emergency Loan Payment,2289.57,expense
+2024-06-11,Overdue Tax,1188.87,expense
+2024-06-11,Office Rent,2611.28,expense
+2024-06-11,Emergency Loan Payment,663.23,expense
+2024-06-11,Refund Received,118.17,income
+2024-06-13,Emergency Loan Payment,1998.99,expense
+2024-06-14,Small Gig,50.90,income
+2024-06-15,Legal Fees,2171.45,expense
+2024-06-17,Broken Equipment,2696.91,expense
+2024-06-19,Legal Fees,1550.23,expense
+2024-06-19,Overdue Tax,2949.94,expense
+2024-06-20,Refund Received,354.54,income
+2024-06-21,Marketing Disaster,811.34,expense
+2024-06-22,Overdue Tax,2633.12,expense
+2024-06-23,Office Spoilage,1247.89,expense
+2024-06-24,Overdue Tax,1163.41,expense
+2024-06-24,Emergency Loan Payment,1495.75,expense
+2024-06-25,Server Penalty,1742.00,expense
+2024-06-26,Refund Received,87.39,income
+2024-06-26,Server Penalty,1645.42,expense
+2024-06-27,Broken Equipment,2925.45,expense
+2024-06-28,Marketing Disaster,2020.79,expense
+2024-06-29,Refund Received,366.78,income
+2024-06-30,Small Gig,362.98,income
+2024-07-02,Office Spoilage,2117.22,expense
+2024-07-02,Marketing Disaster,687.40,expense
+2024-07-02,Office Rent,971.84,expense
+2024-07-02,Emergency Loan Payment,2420.08,expense
+2024-07-04,Marketing Disaster,2649.03,expense
+2024-07-04,Broken Equipment,2897.61,expense
+2024-07-04,MASSIVE OVERDUE TAX SURCHARGE,23734.40,expense
+2024-07-06,Server Penalty,2155.87,expense
+2024-07-06,Server Penalty,733.12,expense
+2024-07-08,Overdue Tax,1474.25,expense
+2024-07-08,Office Spoilage,903.23,expense
+2024-07-10,Office Spoilage,2846.50,expense
+2024-07-12,Marketing Disaster,2465.20,expense
+2024-07-12,Server Penalty,1934.56,expense
+2024-07-12,Server Penalty,2613.23,expense
+2024-07-12,Late Client Payment,284.05,income
+2024-07-14,Legal Fees,2354.89,expense
+2024-07-16,MASSIVE MARKETING DISASTER SURCHARGE,18284.28,expense
+2024-07-16,Emergency Loan Payment,1801.28,expense
+2024-07-18,Broken Equipment,659.86,expense
+2024-07-19,Marketing Disaster,1600.70,expense
+2024-07-19,Late Client Payment,101.63,income
+2024-07-19,Office Spoilage,2211.19,expense
+2024-07-21,Server Penalty,2478.82,expense
+2024-07-22,Overdue Tax,1512.66,expense
+2024-07-24,Late Client Payment,83.90,income
+2024-07-24,Office Spoilage,2543.62,expense
+2024-07-25,Server Penalty,1909.94,expense
+2024-07-26,Office Rent,995.62,expense
+2024-07-26,Office Spoilage,989.53,expense
+2024-07-28,Marketing Disaster,2823.38,expense
+2024-07-29,Office Spoilage,2946.00,expense
+2024-07-31,Late Client Payment,74.46,income
+2024-07-31,Marketing Disaster,1950.16,expense
+2024-08-01,Server Penalty,1542.82,expense
+2024-08-02,MASSIVE OVERDUE TAX SURCHARGE,11945.88,expense
+2024-08-03,Office Spoilage,1081.07,expense
+2024-08-04,Broken Equipment,2836.22,expense
+2024-08-05,Marketing Disaster,918.02,expense
+2024-08-06,Office Rent,2308.51,expense
+2024-08-08,Emergency Loan Payment,1178.24,expense
+2024-08-08,Overdue Tax,2169.55,expense
+2024-08-08,Office Rent,931.00,expense
+2024-08-10,Emergency Loan Payment,2803.67,expense
+2024-08-11,Broken Equipment,2163.80,expense
+2024-08-13,Overdue Tax,2343.87,expense
+2024-08-15,Emergency Loan Payment,2494.08,expense
+2024-08-16,Legal Fees,2711.86,expense
+2024-08-18,Overdue Tax,932.10,expense
+2024-08-18,Small Gig,209.08,income
+2024-08-20,Broken Equipment,779.82,expense
+2024-08-20,Small Gig,198.78,income
+2024-08-20,Marketing Disaster,2713.79,expense
+2024-08-20,Overdue Tax,778.46,expense
+2024-08-21,Broken Equipment,2701.88,expense
+2024-08-22,Refund Received,259.59,income
+2024-08-22,Legal Fees,1886.82,expense
+2024-08-23,Office Spoilage,732.70,expense
+2024-08-25,Late Client Payment,125.11,income
+2024-08-26,Office Spoilage,809.54,expense
+2024-08-26,Office Spoilage,789.42,expense
+2024-08-28,Small Gig,187.25,income
+2024-08-28,Refund Received,167.80,income
+2024-08-29,Marketing Disaster,2488.33,expense
+2024-08-31,Broken Equipment,1041.15,expense
+2024-08-31,Emergency Loan Payment,806.09,expense
+2024-08-31,Office Spoilage,2614.84,expense
+2024-09-02,Legal Fees,2962.62,expense
+2024-09-02,Overdue Tax,1464.18,expense
+2024-09-03,Office Spoilage,514.16,expense
+2024-09-04,Overdue Tax,2795.79,expense
+2024-09-05,Marketing Disaster,1035.41,expense
+2024-09-05,Broken Equipment,1838.82,expense
+2024-09-07,Server Penalty,837.35,expense
+2024-09-08,Small Gig,57.01,income
+2024-09-10,Refund Received,66.21,income
+2024-09-10,Broken Equipment,839.35,expense
+2024-09-12,Broken Equipment,793.14,expense
+2024-09-12,Marketing Disaster,922.92,expense
+2024-09-12,Server Penalty,979.23,expense
+2024-09-13,Server Penalty,2609.19,expense
+2024-09-14,Marketing Disaster,1540.70,expense
+2024-09-14,Marketing Disaster,1217.84,expense
+2024-09-15,Marketing Disaster,1441.20,expense
+2024-09-15,Small Gig,37.50,income
+2024-09-15,Overdue Tax,575.25,expense
+2024-09-16,Late Client Payment,89.79,income
+2024-09-18,Overdue Tax,1673.81,expense
+2024-09-18,MASSIVE LEGAL FEES SURCHARGE,24548.17,expense
+2024-09-18,Emergency Loan Payment,928.08,expense
+2024-09-20,MASSIVE BROKEN EQUIPMENT SURCHARGE,13250.53,expense
+2024-09-20,Legal Fees,980.46,expense
+2024-09-22,Overdue Tax,2715.59,expense
+2024-09-22,Small Gig,48.03,income
+2024-09-22,Late Client Payment,76.48,income
+2024-09-23,Server Penalty,2943.30,expense
+2024-09-24,Legal Fees,1218.43,expense
+2024-09-24,Office Spoilage,738.97,expense
+2024-09-26,Office Rent,2707.34,expense
+2024-09-27,Marketing Disaster,2722.44,expense
+2024-09-27,Broken Equipment,2501.84,expense
+2024-09-28,Overdue Tax,594.44,expense
+2024-09-30,Refund Received,144.09,income
+2024-10-01,Office Rent,2713.40,expense
+2024-10-03,Marketing Disaster,2902.12,expense
+2024-10-03,Emergency Loan Payment,1263.84,expense
+2024-10-03,Broken Equipment,1684.36,expense
+2024-10-03,Refund Received,98.26,income
+2024-10-03,Server Penalty,2544.75,expense
+2024-10-04,Office Rent,981.11,expense
+2024-10-05,Small Gig,24.97,income
+2024-10-05,Refund Received,88.32,income
+2024-10-07,Office Rent,2645.58,expense
+2024-10-08,Small Gig,132.67,income
+2024-10-09,Emergency Loan Payment,581.49,expense
+2024-10-09,Office Rent,2134.84,expense
+2024-10-10,Legal Fees,1346.30,expense
+2024-10-11,Office Spoilage,1683.08,expense
+2024-10-11,Office Rent,2098.38,expense
+2024-10-13,Overdue Tax,1560.85,expense
+2024-10-15,Emergency Loan Payment,772.17,expense
+2024-10-17,Marketing Disaster,2846.10,expense
+2024-10-18,Office Spoilage,2452.21,expense
+2024-10-19,Small Gig,32.83,income
+2024-10-19,Marketing Disaster,620.65,expense
+2024-10-20,Legal Fees,1951.96,expense
+2024-10-22,Emergency Loan Payment,2694.80,expense
+2024-10-23,Marketing Disaster,975.41,expense
+2024-10-24,Overdue Tax,2884.94,expense
+2024-10-24,Marketing Disaster,1572.82,expense
+2024-10-26,Overdue Tax,2639.06,expense
+2024-10-27,Office Spoilage,2656.51,expense
+2024-10-29,Server Penalty,1389.36,expense
+2024-10-30,Emergency Loan Payment,1595.54,expense
+2024-10-31,Office Rent,603.05,expense
+2024-11-01,Office Spoilage,1565.23,expense
+2024-11-02,Refund Received,49.13,income
+2024-11-04,Overdue Tax,2332.12,expense
+2024-11-06,Overdue Tax,2757.16,expense
+2024-11-08,Emergency Loan Payment,2705.17,expense
+2024-11-09,Marketing Disaster,2279.58,expense
+2024-11-11,Refund Received,22.18,income
+2024-11-12,Office Rent,1325.95,expense
+2024-11-13,Marketing Disaster,540.64,expense
+2024-11-15,Late Client Payment,18.12,income
+2024-11-15,Marketing Disaster,745.70,expense
+2024-11-17,Small Gig,32.83,income
+2024-11-19,Legal Fees,1219.10,expense
+2024-11-21,Overdue Tax,1943.77,expense
+2024-11-22,Small Gig,36.16,income
+2024-11-23,Legal Fees,2907.28,expense
+2024-11-25,Legal Fees,2735.26,expense
+2024-11-25,Emergency Loan Payment,2985.87,expense
+2024-11-25,Small Gig,77.47,income
+2024-11-26,Emergency Loan Payment,1319.75,expense
+2024-11-28,Office Spoilage,1158.73,expense
+2024-11-30,Office Spoilage,1328.99,expense
+2024-11-30,Office Spoilage,1941.15,expense
+2024-11-30,Broken Equipment,2642.15,expense
+2024-11-30,Server Penalty,2181.43,expense
+2024-12-02,Legal Fees,969.85,expense
+2024-12-02,Late Client Payment,62.04,income
+2024-12-02,Broken Equipment,975.45,expense
+2024-12-04,Broken Equipment,2015.61,expense
+2024-12-05,Small Gig,48.06,income
+2024-12-05,Overdue Tax,2849.44,expense
+2024-12-05,Refund Received,60.21,income
+2024-12-05,Marketing Disaster,1764.29,expense
+2024-12-07,Small Gig,31.42,income
+2024-12-07,Marketing Disaster,1289.32,expense
+2024-12-08,Legal Fees,2194.70,expense
+2024-12-09,Overdue Tax,1073.85,expense
+2024-12-09,MASSIVE BROKEN EQUIPMENT SURCHARGE,24506.72,expense
+2024-12-10,Late Client Payment,23.22,income
+2024-12-12,Overdue Tax,2765.76,expense
+2024-12-13,Broken Equipment,523.10,expense
+2024-12-14,Overdue Tax,2402.46,expense
+2024-12-15,Marketing Disaster,1258.51,expense
+2024-12-15,Marketing Disaster,1505.81,expense
+2024-12-17,Late Client Payment,31.58,income
+2024-12-19,Marketing Disaster,1530.33,expense
+2024-12-20,Refund Received,30.90,income
+2024-12-22,Late Client Payment,58.12,income
+2024-12-23,Broken Equipment,2751.41,expense
+2024-12-24,Office Spoilage,2336.04,expense
+2024-12-25,Legal Fees,1317.45,expense
+2024-12-26,Broken Equipment,752.92,expense
+2024-12-28,Overdue Tax,1427.54,expense
+2024-12-29,Emergency Loan Payment,573.21,expense
+2024-12-30,Server Penalty,567.48,expense
+2024-12-30,Small Gig,78.25,income
+2024-12-31,Late Client Payment,73.84,income
+2025-01-02,Legal Fees,2177.24,expense
+2025-01-04,Refund Received,489.38,income
+2025-01-06,Legal Fees,961.58,expense
+2025-01-07,Marketing Disaster,862.06,expense
+2025-01-08,Refund Received,546.26,income
+2025-01-10,Emergency Loan Payment,1030.16,expense
+2025-01-12,Overdue Tax,1673.97,expense
+2025-01-12,Emergency Loan Payment,934.69,expense
+2025-01-12,Small Gig,318.84,income
+2025-01-12,Late Client Payment,117.15,income
+2025-01-14,Office Rent,913.54,expense
+2025-01-16,Overdue Tax,1571.57,expense
+2025-01-17,MASSIVE OFFICE SPOILAGE SURCHARGE,15520.22,expense
+2025-01-17,Office Spoilage,2638.45,expense
+2025-01-19,Marketing Disaster,2760.69,expense
+2025-01-20,MASSIVE LEGAL FEES SURCHARGE,10722.65,expense
+2025-01-21,Office Spoilage,656.14,expense
+2025-01-23,Server Penalty,2696.66,expense
+2025-01-24,Late Client Payment,205.61,income
+2025-01-24,Small Gig,169.86,income
+2025-01-24,Office Spoilage,2566.37,expense
+2025-01-26,Legal Fees,710.04,expense
+2025-01-26,Server Penalty,640.40,expense
+2025-01-28,Office Rent,862.20,expense
+2025-01-29,Refund Received,654.24,income
+2025-01-29,Broken Equipment,1252.39,expense
+2025-01-29,Emergency Loan Payment,2042.58,expense
+2025-01-29,Emergency Loan Payment,2437.82,expense
+2025-01-31,Office Spoilage,602.78,expense
+2025-01-31,Server Penalty,2409.56,expense
+2025-02-01,Late Client Payment,230.58,income
+2025-02-03,Office Rent,2378.54,expense
+2025-02-03,Office Rent,2431.17,expense
+2025-02-03,Broken Equipment,602.96,expense
+2025-02-04,Emergency Loan Payment,635.96,expense
+2025-02-04,Broken Equipment,1326.88,expense
+2025-02-06,Office Spoilage,874.30,expense
+2025-02-08,Legal Fees,720.76,expense
+2025-02-08,Office Spoilage,1003.61,expense
+2025-02-10,Overdue Tax,1019.36,expense
+2025-02-11,Broken Equipment,1527.75,expense
+2025-02-12,Marketing Disaster,1317.51,expense
+2025-02-12,Office Spoilage,821.87,expense
+2025-02-14,Broken Equipment,700.89,expense
+2025-02-14,Broken Equipment,801.05,expense
+2025-02-16,Refund Received,300.71,income
+2025-02-17,Marketing Disaster,869.17,expense
+2025-02-19,Marketing Disaster,998.00,expense
+2025-02-21,Overdue Tax,2797.61,expense
+2025-02-22,Office Spoilage,2286.16,expense
+2025-02-23,Broken Equipment,756.29,expense
+2025-02-23,Marketing Disaster,561.83,expense
+2025-02-23,MASSIVE OFFICE RENT SURCHARGE,17399.01,expense
+2025-02-23,Office Spoilage,2144.81,expense
+2025-02-25,Server Penalty,2207.76,expense
+2025-02-27,Broken Equipment,2292.73,expense
+2025-02-27,Office Spoilage,1200.86,expense
+2025-03-01,Overdue Tax,1705.72,expense
+2025-03-02,Legal Fees,1327.42,expense
+2025-03-03,Emergency Loan Payment,1816.61,expense
+2025-03-04,Office Rent,579.86,expense
+2025-03-05,Refund Received,184.07,income

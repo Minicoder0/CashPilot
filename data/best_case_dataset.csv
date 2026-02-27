@@ -1,0 +1,451 @@
+date,description,amount,type
+2024-01-01,Client Payment,2533.41,income
+2024-01-03,AWS Hosting,869.77,expense
+2024-01-04,Enterprise License,43480.79,income
+2024-01-06,Consulting Retainer,2100.98,income
+2024-01-06,Google Workspace,650.58,expense
+2024-01-08,Client Payment,2961.28,income
+2024-01-08,Internet,823.60,expense
+2024-01-08,AWS Hosting,706.87,expense
+2024-01-09,Google Workspace,513.18,expense
+2024-01-10,Payroll,9864.80,expense
+2024-01-11,Internet,971.09,expense
+2024-01-13,Investment Dividend,5151.80,income
+2024-01-15,Payroll,5179.27,expense
+2024-01-17,Investment Dividend,4699.26,income
+2024-01-18,Internet,564.18,expense
+2024-01-19,Payroll,7300.23,expense
+2024-01-19,Investment Dividend,3902.80,income
+2024-01-20,Office Rent,3000.00,expense
+2024-01-22,Consulting Retainer,2304.00,income
+2024-01-23,Office Rent,3000.00,expense
+2024-01-25,Marketing Team,989.02,expense
+2024-01-25,Enterprise License,49718.80,income
+2024-01-27,Investment Dividend,1173.68,income
+2024-01-28,Client Payment,4087.16,income
+2024-01-29,Investment Dividend,2621.48,income
+2024-01-30,Client Payment,4194.03,income
+2024-01-30,Consulting Retainer,2837.13,income
+2024-01-30,Enterprise License,29320.46,income
+2024-02-01,SaaS Subscription,1815.80,income
+2024-02-03,Enterprise License,33326.82,income
+2024-02-05,Investment Dividend,4939.92,income
+2024-02-06,Consulting Retainer,3545.49,income
+2024-02-07,SaaS Subscription,4893.83,income
+2024-02-08,Client Payment,1989.47,income
+2024-02-08,Client Payment,5081.76,income
+2024-02-08,Consulting Retainer,5756.54,income
+2024-02-10,Payroll,6492.88,expense
+2024-02-10,Investment Dividend,2408.76,income
+2024-02-10,Google Workspace,275.18,expense
+2024-02-12,Client Payment,2887.28,income
+2024-02-14,Enterprise License,45088.25,income
+2024-02-15,Enterprise License,31665.50,income
+2024-02-17,Enterprise License,45081.66,income
+2024-02-19,Consulting Retainer,2454.63,income
+2024-02-20,Consulting Retainer,4791.05,income
+2024-02-20,Office Rent,3000.00,expense
+2024-02-20,Consulting Retainer,4774.56,income
+2024-02-20,Marketing Team,266.09,expense
+2024-02-21,Client Payment,2670.34,income
+2024-02-22,Google Workspace,278.09,expense
+2024-02-22,Payroll,6185.19,expense
+2024-02-24,Marketing Team,472.49,expense
+2024-02-25,Client Payment,4136.28,income
+2024-02-25,Enterprise License,24291.42,income
+2024-02-27,Investment Dividend,4688.83,income
+2024-02-28,Enterprise License,24733.92,income
+2024-03-01,Google Workspace,774.32,expense
+2024-03-01,Investment Dividend,5230.14,income
+2024-03-02,Consulting Retainer,5666.53,income
+2024-03-04,Consulting Retainer,6127.26,income
+2024-03-05,Client Payment,1431.17,income
+2024-03-07,Internet,981.81,expense
+2024-03-07,Client Payment,2497.03,income
+2024-03-08,AWS Hosting,141.39,expense
+2024-03-09,Investment Dividend,2244.29,income
+2024-03-11,AWS Hosting,380.60,expense
+2024-03-12,Client Payment,5239.54,income
+2024-03-12,Marketing Team,260.53,expense
+2024-03-14,Client Payment,3177.88,income
+2024-03-16,Consulting Retainer,4695.06,income
+2024-03-17,Investment Dividend,3774.53,income
+2024-03-17,Software Tools,911.02,expense
+2024-03-17,SaaS Subscription,6219.93,income
+2024-03-18,AWS Hosting,407.21,expense
+2024-03-18,Consulting Retainer,2656.27,income
+2024-03-20,Google Workspace,854.63,expense
+2024-03-21,Consulting Retainer,3091.35,income
+2024-03-23,Payroll,5650.83,expense
+2024-03-25,Payroll,6891.51,expense
+2024-03-27,Marketing Team,793.54,expense
+2024-03-27,Enterprise License,49979.19,income
+2024-03-27,AWS Hosting,277.71,expense
+2024-03-27,Consulting Retainer,4913.68,income
+2024-03-27,Software Tools,650.99,expense
+2024-03-28,Client Payment,3316.24,income
+2024-03-28,Consulting Retainer,2341.52,income
+2024-03-29,SaaS Subscription,1341.07,income
+2024-03-31,Software Tools,611.70,expense
+2024-04-01,Consulting Retainer,4544.97,income
+2024-04-02,Google Workspace,778.48,expense
+2024-04-04,Payroll,7489.10,expense
+2024-04-05,Investment Dividend,2491.64,income
+2024-04-07,AWS Hosting,585.48,expense
+2024-04-07,Software Tools,623.10,expense
+2024-04-07,SaaS Subscription,4698.40,income
+2024-04-08,Enterprise License,46443.73,income
+2024-04-08,Enterprise License,21412.56,income
+2024-04-08,Enterprise License,47711.18,income
+2024-04-09,SaaS Subscription,6017.62,income
+2024-04-10,Payroll,5856.98,expense
+2024-04-12,Consulting Retainer,5011.29,income
+2024-04-12,Software Tools,192.67,expense
+2024-04-13,Internet,816.56,expense
+2024-04-15,Google Workspace,421.90,expense
+2024-04-15,Investment Dividend,2119.67,income
+2024-04-15,Payroll,7327.62,expense
+2024-04-17,SaaS Subscription,2808.04,income
+2024-04-18,Investment Dividend,2860.12,income
+2024-04-20,Consulting Retainer,5111.75,income
+2024-04-22,Client Payment,2585.78,income
+2024-04-23,Software Tools,354.99,expense
+2024-04-23,Enterprise License,36914.99,income
+2024-04-25,Client Payment,2450.18,income
+2024-04-26,SaaS Subscription,1539.66,income
+2024-04-27,Payroll,5142.78,expense
+2024-04-27,Enterprise License,47065.73,income
+2024-04-27,Client Payment,5463.00,income
+2024-04-29,Consulting Retainer,4815.85,income
+2024-05-01,Marketing Team,453.06,expense
+2024-05-01,Software Tools,482.10,expense
+2024-05-01,Enterprise License,37034.43,income
+2024-05-03,SaaS Subscription,3529.31,income
+2024-05-04,SaaS Subscription,5832.99,income
+2024-05-04,Investment Dividend,5128.01,income
+2024-05-06,Consulting Retainer,6025.53,income
+2024-05-07,Investment Dividend,4008.31,income
+2024-05-09,Client Payment,3680.10,income
+2024-05-11,Investment Dividend,2816.92,income
+2024-05-11,Enterprise License,25750.48,income
+2024-05-11,Consulting Retainer,1961.04,income
+2024-05-12,Payroll,9625.09,expense
+2024-05-12,Consulting Retainer,5047.68,income
+2024-05-14,SaaS Subscription,5411.94,income
+2024-05-15,Client Payment,2608.56,income
+2024-05-16,Enterprise License,36883.59,income
+2024-05-18,Marketing Team,681.70,expense
+2024-05-18,Client Payment,3184.51,income
+2024-05-19,Consulting Retainer,5062.76,income
+2024-05-21,SaaS Subscription,3843.38,income
+2024-05-23,Enterprise License,49239.76,income
+2024-05-24,Investment Dividend,5990.50,income
+2024-05-24,Office Rent,3000.00,expense
+2024-05-25,Client Payment,6174.20,income
+2024-05-26,Marketing Team,259.45,expense
+2024-05-26,Enterprise License,31124.71,income
+2024-05-27,Consulting Retainer,6438.64,income
+2024-05-27,Marketing Team,320.94,expense
+2024-05-29,AWS Hosting,929.96,expense
+2024-05-31,Software Tools,957.28,expense
+2024-06-01,SaaS Subscription,4724.28,income
+2024-06-03,SaaS Subscription,6225.18,income
+2024-06-05,Google Workspace,260.43,expense
+2024-06-06,AWS Hosting,571.96,expense
+2024-06-07,Client Payment,5126.30,income
+2024-06-09,Marketing Team,606.58,expense
+2024-06-10,AWS Hosting,652.48,expense
+2024-06-11,Office Rent,3000.00,expense
+2024-06-11,Marketing Team,838.42,expense
+2024-06-13,Google Workspace,774.22,expense
+2024-06-14,Consulting Retainer,2915.60,income
+2024-06-15,Internet,375.61,expense
+2024-06-16,Client Payment,6395.48,income
+2024-06-17,Enterprise License,37635.04,income
+2024-06-19,Client Payment,1855.03,income
+2024-06-21,Investment Dividend,2975.24,income
+2024-06-22,Client Payment,2856.87,income
+2024-06-24,Client Payment,4966.37,income
+2024-06-26,Office Rent,3000.00,expense
+2024-06-26,Payroll,7791.98,expense
+2024-06-27,Consulting Retainer,5388.18,income
+2024-06-27,Investment Dividend,2805.84,income
+2024-06-29,Consulting Retainer,5050.25,income
+2024-06-30,Enterprise License,39868.14,income
+2024-06-30,Client Payment,3385.10,income
+2024-06-30,SaaS Subscription,1855.19,income
+2024-07-01,Google Workspace,686.01,expense
+2024-07-03,Internet,890.83,expense
+2024-07-03,Consulting Retainer,5322.74,income
+2024-07-03,Consulting Retainer,4415.99,income
+2024-07-03,Payroll,8178.61,expense
+2024-07-05,SaaS Subscription,2256.71,income
+2024-07-07,Client Payment,6152.19,income
+2024-07-08,Google Workspace,919.27,expense
+2024-07-10,SaaS Subscription,7505.03,income
+2024-07-10,Investment Dividend,5890.85,income
+2024-07-12,Enterprise License,40387.15,income
+2024-07-14,Enterprise License,46166.64,income
+2024-07-14,SaaS Subscription,6687.69,income
+2024-07-14,Client Payment,4040.10,income
+2024-07-16,SaaS Subscription,2560.57,income
+2024-07-16,Enterprise License,39498.24,income
+2024-07-17,SaaS Subscription,1868.45,income
+2024-07-18,Enterprise License,27602.69,income
+2024-07-19,Payroll,9917.79,expense
+2024-07-19,Internet,151.34,expense
+2024-07-20,Consulting Retainer,5240.81,income
+2024-07-21,Google Workspace,284.66,expense
+2024-07-23,Office Rent,3000.00,expense
+2024-07-23,Office Rent,3000.00,expense
+2024-07-23,Payroll,5532.25,expense
+2024-07-25,Google Workspace,603.94,expense
+2024-07-27,SaaS Subscription,6833.05,income
+2024-07-29,SaaS Subscription,5380.03,income
+2024-07-29,AWS Hosting,600.73,expense
+2024-07-30,Payroll,5158.92,expense
+2024-07-31,Google Workspace,663.12,expense
+2024-08-02,SaaS Subscription,3132.07,income
+2024-08-03,Payroll,6853.23,expense
+2024-08-05,Consulting Retainer,2230.72,income
+2024-08-07,Enterprise License,20992.96,income
+2024-08-07,Client Payment,7538.57,income
+2024-08-09,Marketing Team,814.49,expense
+2024-08-09,Enterprise License,38700.29,income
+2024-08-09,Marketing Team,386.98,expense
+2024-08-10,AWS Hosting,135.22,expense
+2024-08-10,Investment Dividend,6932.51,income
+2024-08-11,Office Rent,3000.00,expense
+2024-08-13,Investment Dividend,2678.68,income
+2024-08-14,Client Payment,2664.99,income
+2024-08-15,Investment Dividend,2100.02,income
+2024-08-17,Client Payment,2235.16,income
+2024-08-19,Enterprise License,33531.43,income
+2024-08-21,Marketing Team,634.61,expense
+2024-08-22,Client Payment,5495.03,income
+2024-08-23,Payroll,9051.11,expense
+2024-08-23,Internet,648.73,expense
+2024-08-25,Client Payment,4038.88,income
+2024-08-26,Google Workspace,397.86,expense
+2024-08-27,Investment Dividend,3890.36,income
+2024-08-27,Consulting Retainer,8332.05,income
+2024-08-27,Google Workspace,880.27,expense
+2024-08-28,Payroll,9849.15,expense
+2024-08-30,Office Rent,3000.00,expense
+2024-08-30,Investment Dividend,3552.29,income
+2024-08-30,Google Workspace,399.20,expense
+2024-08-30,Enterprise License,26164.98,income
+2024-08-30,Investment Dividend,7700.17,income
+2024-08-30,Payroll,9652.51,expense
+2024-08-30,Client Payment,6956.29,income
+2024-09-01,Investment Dividend,3135.42,income
+2024-09-03,Software Tools,936.51,expense
+2024-09-04,Payroll,5449.13,expense
+2024-09-06,Investment Dividend,4723.11,income
+2024-09-06,SaaS Subscription,6445.22,income
+2024-09-07,Enterprise License,49983.54,income
+2024-09-08,SaaS Subscription,3562.79,income
+2024-09-10,Client Payment,8128.85,income
+2024-09-10,AWS Hosting,990.66,expense
+2024-09-12,Office Rent,3000.00,expense
+2024-09-14,Consulting Retainer,7952.76,income
+2024-09-14,Consulting Retainer,5500.65,income
+2024-09-16,Enterprise License,28671.51,income
+2024-09-18,Investment Dividend,8009.80,income
+2024-09-20,Investment Dividend,4079.25,income
+2024-09-21,Consulting Retainer,3766.02,income
+2024-09-21,AWS Hosting,184.85,expense
+2024-09-22,Enterprise License,27047.87,income
+2024-09-22,Enterprise License,28803.01,income
+2024-09-24,Investment Dividend,4342.08,income
+2024-09-26,SaaS Subscription,3222.52,income
+2024-09-27,SaaS Subscription,6153.49,income
+2024-09-28,Consulting Retainer,8079.75,income
+2024-09-28,Enterprise License,34819.71,income
+2024-09-29,Investment Dividend,4614.93,income
+2024-09-29,AWS Hosting,607.51,expense
+2024-09-30,SaaS Subscription,2569.20,income
+2024-09-30,Client Payment,6248.65,income
+2024-10-02,Client Payment,5640.20,income
+2024-10-03,Investment Dividend,5275.98,income
+2024-10-05,Google Workspace,960.07,expense
+2024-10-06,Enterprise License,39116.55,income
+2024-10-07,Investment Dividend,2541.73,income
+2024-10-09,SaaS Subscription,6246.07,income
+2024-10-09,Software Tools,700.60,expense
+2024-10-09,Google Workspace,839.94,expense
+2024-10-10,Internet,126.52,expense
+2024-10-10,Marketing Team,230.54,expense
+2024-10-11,Marketing Team,467.63,expense
+2024-10-11,Enterprise License,32730.06,income
+2024-10-13,Consulting Retainer,5312.16,income
+2024-10-13,Marketing Team,135.71,expense
+2024-10-14,Internet,233.97,expense
+2024-10-16,Consulting Retainer,4767.34,income
+2024-10-18,Enterprise License,35172.62,income
+2024-10-19,Consulting Retainer,2712.57,income
+2024-10-20,AWS Hosting,519.28,expense
+2024-10-21,Investment Dividend,7559.65,income
+2024-10-23,Client Payment,2038.47,income
+2024-10-23,Consulting Retainer,8839.76,income
+2024-10-25,Office Rent,3000.00,expense
+2024-10-25,SaaS Subscription,3137.77,income
+2024-10-25,Investment Dividend,3976.27,income
+2024-10-26,Consulting Retainer,7712.85,income
+2024-10-27,Client Payment,3062.71,income
+2024-10-27,Client Payment,6485.40,income
+2024-10-27,Consulting Retainer,3609.84,income
+2024-10-27,Office Rent,3000.00,expense
+2024-10-28,SaaS Subscription,6323.67,income
+2024-10-29,Consulting Retainer,4584.18,income
+2024-10-31,Investment Dividend,2078.46,income
+2024-10-31,Consulting Retainer,9127.60,income
+2024-11-01,Consulting Retainer,7289.62,income
+2024-11-02,Office Rent,3000.00,expense
+2024-11-03,Client Payment,9065.13,income
+2024-11-03,Google Workspace,323.04,expense
+2024-11-04,AWS Hosting,270.71,expense
+2024-11-05,Enterprise License,28806.74,income
+2024-11-06,Investment Dividend,9047.99,income
+2024-11-06,SaaS Subscription,9145.83,income
+2024-11-06,Payroll,8500.40,expense
+2024-11-06,Office Rent,3000.00,expense
+2024-11-07,Enterprise License,49661.64,income
+2024-11-08,Office Rent,3000.00,expense
+2024-11-09,Internet,753.19,expense
+2024-11-11,Internet,876.77,expense
+2024-11-13,SaaS Subscription,3921.42,income
+2024-11-15,Marketing Team,323.67,expense
+2024-11-16,Investment Dividend,3617.33,income
+2024-11-16,Investment Dividend,3509.67,income
+2024-11-16,Client Payment,2317.85,income
+2024-11-18,Client Payment,9495.37,income
+2024-11-18,Google Workspace,257.46,expense
+2024-11-20,Consulting Retainer,7539.82,income
+2024-11-20,Office Rent,3000.00,expense
+2024-11-22,Google Workspace,454.61,expense
+2024-11-24,Payroll,7930.96,expense
+2024-11-26,Investment Dividend,4122.66,income
+2024-11-26,SaaS Subscription,6115.48,income
+2024-11-28,Google Workspace,492.43,expense
+2024-11-30,Client Payment,2983.82,income
+2024-11-30,Client Payment,3925.31,income
+2024-11-30,AWS Hosting,727.14,expense
+2024-12-01,Investment Dividend,4538.77,income
+2024-12-02,Enterprise License,47672.63,income
+2024-12-04,Consulting Retainer,3587.06,income
+2024-12-05,Consulting Retainer,2454.98,income
+2024-12-06,Client Payment,5973.33,income
+2024-12-08,Google Workspace,794.34,expense
+2024-12-08,Investment Dividend,3268.07,income
+2024-12-08,Consulting Retainer,2727.13,income
+2024-12-10,Consulting Retainer,8394.15,income
+2024-12-11,Google Workspace,552.69,expense
+2024-12-13,Software Tools,819.35,expense
+2024-12-13,Google Workspace,736.25,expense
+2024-12-13,Client Payment,7498.38,income
+2024-12-14,Office Rent,3000.00,expense
+2024-12-14,AWS Hosting,311.22,expense
+2024-12-14,Client Payment,6784.85,income
+2024-12-15,Marketing Team,210.90,expense
+2024-12-16,SaaS Subscription,2093.07,income
+2024-12-17,Google Workspace,343.69,expense
+2024-12-19,SaaS Subscription,5654.25,income
+2024-12-19,AWS Hosting,969.64,expense
+2024-12-19,Investment Dividend,4045.18,income
+2024-12-19,Consulting Retainer,5245.04,income
+2024-12-21,Investment Dividend,5407.77,income
+2024-12-21,Google Workspace,881.14,expense
+2024-12-22,Marketing Team,781.61,expense
+2024-12-22,Investment Dividend,6534.60,income
+2024-12-24,Enterprise License,27628.46,income
+2024-12-25,SaaS Subscription,3422.65,income
+2024-12-27,AWS Hosting,557.25,expense
+2024-12-27,Payroll,5122.58,expense
+2024-12-29,SaaS Subscription,4174.60,income
+2024-12-29,Marketing Team,396.54,expense
+2024-12-30,Consulting Retainer,3413.87,income
+2024-12-30,Client Payment,7398.93,income
+2024-12-30,Google Workspace,863.01,expense
+2025-01-01,SaaS Subscription,4419.55,income
+2025-01-01,Consulting Retainer,3529.59,income
+2025-01-01,Office Rent,3000.00,expense
+2025-01-02,Consulting Retainer,3196.13,income
+2025-01-02,AWS Hosting,879.34,expense
+2025-01-02,Google Workspace,924.63,expense
+2025-01-04,Internet,408.94,expense
+2025-01-06,Internet,241.97,expense
+2025-01-07,Software Tools,524.98,expense
+2025-01-09,Payroll,5641.72,expense
+2025-01-10,Investment Dividend,1618.84,income
+2025-01-10,Enterprise License,46064.27,income
+2025-01-11,Payroll,5652.36,expense
+2025-01-13,Client Payment,4136.65,income
+2025-01-14,Marketing Team,139.51,expense
+2025-01-15,Software Tools,794.88,expense
+2025-01-16,Internet,531.98,expense
+2025-01-18,Client Payment,4308.15,income
+2025-01-19,Investment Dividend,4729.75,income
+2025-01-21,Internet,772.74,expense
+2025-01-22,Marketing Team,712.07,expense
+2025-01-22,Consulting Retainer,1287.03,income
+2025-01-24,Consulting Retainer,3131.20,income
+2025-01-25,SaaS Subscription,2938.58,income
+2025-01-27,Enterprise License,43391.23,income
+2025-01-29,Consulting Retainer,2485.00,income
+2025-01-30,Internet,624.92,expense
+2025-01-31,Investment Dividend,2689.49,income
+2025-02-02,Investment Dividend,3301.54,income
+2025-02-03,Enterprise License,22879.21,income
+2025-02-04,Consulting Retainer,5262.34,income
+2025-02-04,Google Workspace,117.14,expense
+2025-02-04,Internet,957.16,expense
+2025-02-06,Payroll,9336.73,expense
+2025-02-08,Consulting Retainer,1872.67,income
+2025-02-10,AWS Hosting,556.27,expense
+2025-02-10,Software Tools,571.37,expense
+2025-02-11,SaaS Subscription,3671.11,income
+2025-02-12,Client Payment,2037.79,income
+2025-02-14,Consulting Retainer,1617.45,income
+2025-02-15,Investment Dividend,2414.00,income
+2025-02-15,AWS Hosting,377.38,expense
+2025-02-17,Marketing Team,168.60,expense
+2025-02-17,Enterprise License,41489.68,income
+2025-02-18,Payroll,8948.72,expense
+2025-02-19,Enterprise License,37194.70,income
+2025-02-19,Software Tools,306.32,expense
+2025-02-21,Consulting Retainer,5133.24,income
+2025-02-21,Investment Dividend,5729.65,income
+2025-02-21,Enterprise License,45311.98,income
+2025-02-22,SaaS Subscription,3293.18,income
+2025-02-22,Office Rent,3000.00,expense
+2025-02-24,Software Tools,203.92,expense
+2025-02-26,Enterprise License,29664.09,income
+2025-02-26,Client Payment,4097.80,income
+2025-02-27,Software Tools,780.05,expense
+2025-03-01,AWS Hosting,590.93,expense
+2025-03-01,Consulting Retainer,3530.65,income
+2025-03-02,Consulting Retainer,2601.33,income
+2025-03-04,SaaS Subscription,1308.52,income
+2025-03-05,Investment Dividend,1811.27,income
+2025-03-06,Internet,709.37,expense
+2025-03-08,Client Payment,2714.37,income
+2025-03-09,Consulting Retainer,5556.47,income
+2025-03-11,Software Tools,366.21,expense
+2025-03-13,Enterprise License,49209.16,income
+2025-03-15,Client Payment,5034.60,income
+2025-03-15,SaaS Subscription,1622.24,income
+2025-03-16,Investment Dividend,2062.41,income
+2025-03-18,AWS Hosting,181.90,expense
+2025-03-20,SaaS Subscription,1764.37,income
+2025-03-20,SaaS Subscription,4411.17,income
+2025-03-20,Investment Dividend,2054.34,income
+2025-03-21,Google Workspace,399.61,expense
+2025-03-21,Payroll,5062.04,expense
+2025-03-23,Consulting Retainer,2109.62,income
+2025-03-24,Investment Dividend,2098.26,income
+2025-03-26,Consulting Retainer,3129.66,income
+2025-03-28,Marketing Team,429.97,expense
+2025-03-28,Investment Dividend,2643.40,income
+2025-03-28,Investment Dividend,5024.29,income
+2025-03-29,Office Rent,3000.00,expense
