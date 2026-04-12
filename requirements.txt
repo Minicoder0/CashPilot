@@ -1,0 +1,9 @@
+flask
+python-dotenv
+openai
+authlib
+requests
+flask-sqlalchemy
+psycopg2-binary
+bcrypt
+resend
